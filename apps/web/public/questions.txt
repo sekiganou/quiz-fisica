@@ -1,0 +1,17 @@
+Q: testo 1.1
+I: test2.jpg
+T: risposta vera 1.1
+F: risposta falsa 1.1.1
+F: risposta falsa 1.1.2
+U: testo 1.2
+T: risposta vera 1.2
+F: risposta falsa 1.2.1
+F: risposta falsa 1.2.2
+U: testo 1.3
+T: risposta vera 1.3
+F: risposta falsa 1.3.1
+F: risposta falsa 1.3.2
+Q: testo 2.1
+T: risposta vera 2.1
+F: risposta falsa 2.1.1
+F: risposta falsa 2.1.2
