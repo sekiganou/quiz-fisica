@@ -1,15 +1,15 @@
 import { Question } from "@/app/actions/questions";
-import { Card, CardContent, CardHeader } from "@workspace/ui/components/card";
+import { Card, CardHeader } from "@workspace/ui/components/card";
 import { Progress } from "@workspace/ui/components/progress";
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from "@workspace/ui/components/radio-group";
-import { Label } from "@workspace/ui/components/label";
 import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@workspace/ui/components/button";
 import { FollowUpQuestion } from "./FollowUpQuestion";
+import { Form } from "@workspace/ui/components/form";
+import { useForm } from "react-hook-form";
+import { MainQuestion } from "./MainQuestion";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 function shuffleArray<T>(array: T[]): T[] {
   const newArray = [...array];
@@ -22,16 +22,89 @@ function shuffleArray<T>(array: T[]): T[] {
   return newArray;
 }
 
+function shuffleQuestions(questions: Question[]): Question[] {
+  const shuffledQuestions = shuffleArray(
+    questions.map((question) => shuffleAnswers({ question }))
+  );
+  return shuffledQuestions;
+}
+
+function shuffleAnswers({ question }: { question: Question }): Question {
+  if (!question || !question.answers || question.answers.length === 0) {
+    return { ...question };
+  }
+  const shuffledAnswers = shuffleArray(question.answers);
+  return {
+    ...question,
+    answers: shuffledAnswers,
+    followUpQuestion: question.followUpQuestion
+      ? shuffleAnswers({ question: question.followUpQuestion })
+      : null,
+  };
+}
+
+function mapCorrectAnswers(questions: Question[]): Map<number, number> {
+  const correctAnswerMapping = new Map<number, number>();
+  questions.forEach((question) => {
+    getAllTrueAnswersHelper(question, correctAnswerMapping);
+  });
+  return correctAnswerMapping;
+}
+
+function getAllTrueAnswersHelper(
+  question: Question,
+  correctAnswerMapping: Map<number, number>
+) {
+  question.answers.forEach((answer, index) => {
+    if (answer.isCorrect) {
+      correctAnswerMapping.set(question.id, index);
+    }
+  });
+  if (question.followUpQuestion) {
+    getAllTrueAnswersHelper(question.followUpQuestion, correctAnswerMapping);
+  }
+}
+
 export default function RandomQuiz({ questions }: { questions: Question[] }) {
-  const shuffledQuestions = shuffleArray(questions);
+  const shuffledQuestions = shuffleQuestions(questions);
+  const correctAnswersMapping = mapCorrectAnswers(shuffledQuestions);
   let totalQuestions = questions.length;
   const [currentPercent, setCurrentPercent] = useState(0);
-  const [counterQuestions, setCounterQuestions] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(shuffledQuestions[0]);
+  const [showFollowUp, setShowFollowUp] = useState(false);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [wrongAnswers, setWrongAnswers] = useState(0);
 
-  const handleValidateQuestion = () => {};
+  const answerIndexes = Array.from(correctAnswersMapping.values()).map(String);
+
+  const handleMoveToNextQuestion = () => {
+    const nextIndex = currentQuestionIndex + 1;
+    setCurrentQuestionIndex(nextIndex);
+    setCurrentQuestion(shuffledQuestions[nextIndex]);
+    setCurrentPercent(Math.round((nextIndex / shuffledQuestions.length) * 100));
+  };
+
+  const answersText: string[] = [];
+  const getAnswerText = (question: Question | null) => {
+    if (!question) return;
+    question.answers.forEach((answer) => {
+      answersText.push(answer.answerText);
+      getAnswerText(question.followUpQuestion || null);
+    });
+  };
+
+  const FormSchema = z.object({
+    type: z.enum(answersText as [string, ...string[]], {
+      required_error: "Rispondi a tutte le domande.",
+    }),
+  });
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+  });
 
   console.log("shuffledQuestions", shuffledQuestions);
+  console.log("correctAnswersMapping", correctAnswersMapping);
 
   return (
     <>
@@ -59,45 +132,40 @@ export default function RandomQuiz({ questions }: { questions: Question[] }) {
         </div>
       </div>
       <h3 className="text-md font-medium mb-4">
-        Domanda {counterQuestions} di {totalQuestions}
+        Domanda {currentQuestionIndex} di {totalQuestions}
       </h3>
-
-      <Card>
-        <CardHeader>{currentQuestion?.questionText}</CardHeader>
-        {currentQuestion?.image && (
-          <div className="flex justify-center mb-4">
-            <Image
-              src={currentQuestion.image!}
-              alt="Question Image"
-              width={500}
-              height={300}
-              className="rounded-lg"
-            />
-          </div>
-        )}
-        <CardContent>
-          <RadioGroup defaultValue="comfortable">
-            {currentQuestion?.answers.map((answer, index) => (
-              <div className="flex items-center gap-3" key={index}>
-                <RadioGroupItem
-                  value={answer.answerText}
-                  id={`answer-${index}`}
+      <Form {...form}>
+        <form>
+          <Card>
+            <CardHeader>{currentQuestion?.questionText}</CardHeader>
+            {currentQuestion?.image && (
+              <div className="flex justify-center mb-4">
+                <Image
+                  src={currentQuestion.image!}
+                  alt="Question Image"
+                  width={500}
+                  height={300}
+                  className="rounded-lg"
                 />
-                <Label htmlFor={`answer-${index}`}>{answer.answerText}</Label>
               </div>
-            ))}
-          </RadioGroup>
-        </CardContent>
-        {currentQuestion?.followUpQuestion && (
-          <FollowUpQuestion question={currentQuestion.followUpQuestion} />
-        )}
-      </Card>
+            )}
+            {currentQuestion && <MainQuestion question={currentQuestion} />}
+            {currentQuestion?.followUpQuestion && (
+              <FollowUpQuestion question={currentQuestion.followUpQuestion} />
+            )}
+          </Card>
+        </form>
+      </Form>
       <div className="mt-4 flex justify-between mb-4">
-        <Button variant={"outline"} onClick={handleValidateQuestion}>
+        <Button
+          variant={"outline"}
+          type="submit"
+          onSubmit={() => setShowFollowUp(true)}
+        >
           <span className="mr-2">
             <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
               <path
-                d="M8 5l8 7-8 7"
+                d="M7.629 15.314a1 1 0 0 1-1.414 0l-3.536-3.535a1 1 0 1 1 1.414-1.415l2.829 2.829 6.364-6.364a1 1 0 1 1 1.414 1.415l-7.071 7.07z"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
@@ -108,6 +176,27 @@ export default function RandomQuiz({ questions }: { questions: Question[] }) {
           </span>
           Invia Risposta
         </Button>
+        {showFollowUp && (
+          <Button
+            variant="default"
+            onClick={handleMoveToNextQuestion}
+            className="mr-32"
+          >
+            <span className="mr-2">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                <path
+                  d="M8 5l8 7-8 7"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+              </svg>
+            </span>
+            Prossima Domanda
+          </Button>
+        )}
         <Button variant={"destructive"}>
           <span className="mr-2">
             <svg width="18" height="18" fill="none" viewBox="0 0 24 24">

@@ -10,6 +10,7 @@ interface Answer {
 }
 
 export interface Question {
+  id: number;
   image: string | null;
   questionText: string;
   followUpQuestion: Question | null;
@@ -31,6 +32,7 @@ export async function getQuestions() {
 export async function loadQuestionsFromFile(
   input: string
 ): Promise<Question[]> {
+  let questionId = 1;
   let fileContent = readFileSync(input, "utf-8");
   const lines = fileContent.split("\n").filter((line) => line.trim() !== "");
   let questions: Question[] = [];
@@ -50,6 +52,7 @@ export async function loadQuestionsFromFile(
     switch (currentLetter) {
       case QUESTION_LETTER: {
         currentQuestion = {
+          id: questionId++,
           image: null,
           questionText: currentText,
           followUpQuestion: null,
@@ -63,6 +66,7 @@ export async function loadQuestionsFromFile(
           throw new Error("Follow-up question without a main question");
         }
         const followUpQuestion: Question = {
+          id: questionId++,
           questionText: currentText,
           image: null,
           followUpQuestion: null,

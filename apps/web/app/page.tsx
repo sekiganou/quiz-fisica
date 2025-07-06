@@ -22,7 +22,7 @@ export default function Page() {
       <header className="flex items-center justify-between p-4 border-b">
         <h1 className="text-2xl font-bold">Quiz Física</h1>
         <div className="flex gap-2">
-          <Button variant="outline">Statistics</Button>
+          <Button variant="outline">Statistiche</Button>
           <Button variant="destructive">Reset</Button>
         </div>
       </header>

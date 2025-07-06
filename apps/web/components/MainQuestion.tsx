@@ -1,23 +1,18 @@
-// filepath: /root/quiz-fisica/apps/web/components/FollowUpQuestion.tsx
 import { Question } from "@/app/actions/questions";
-import { CardHeader, CardContent } from "@workspace/ui/components/card";
 import {
   RadioGroup,
   RadioGroupItem,
 } from "@workspace/ui/components/radio-group";
 import { Label } from "@workspace/ui/components/label";
+import { CardContent } from "@workspace/ui/components/card";
 
-export function FollowUpQuestion({ question }: { question: Question | null }) {
-  if (!question) return null;
-
+export function MainQuestion({ question }: { question: Question }) {
   return (
     <>
-      <hr className="my-4 ml-4 mr-4" />
-      <CardHeader>{question.questionText}</CardHeader>
       <CardContent>
         <RadioGroup defaultValue="comfortable">
           {question.answers.map((answer, index) => (
-            <div key={index} className="flex items-center gap-3">
+            <div className="flex items-center gap-3" key={index}>
               <RadioGroupItem
                 value={answer.answerText}
                 id={`question-${question.id}-answer-${index}`}
@@ -29,7 +24,6 @@ export function FollowUpQuestion({ question }: { question: Question | null }) {
           ))}
         </RadioGroup>
       </CardContent>
-      <FollowUpQuestion question={question.followUpQuestion} />
     </>
   );
 }
