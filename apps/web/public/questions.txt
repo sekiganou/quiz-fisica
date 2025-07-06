@@ -1,17 +1,31 @@
-Q: testo 1.1
-I: test2.jpg
-T: risposta vera 1.1
-F: risposta falsa 1.1.1
-F: risposta falsa 1.1.2
-U: testo 1.2
-T: risposta vera 1.2
-F: risposta falsa 1.2.1
-F: risposta falsa 1.2.2
-U: testo 1.3
-T: risposta vera 1.3
-F: risposta falsa 1.3.1
-F: risposta falsa 1.3.2
-Q: testo 2.1
-T: risposta vera 2.1
-F: risposta falsa 2.1.1
-F: risposta falsa 2.1.2
+Q: Si consideri una particella carica q di massa m in moto con velocità v- in un campo magnetico B-. La forza 𝐹⃗ che il campo magnetico esercita sulla carica è 𝐹⃗ = 𝑞𝑣⃗ × 𝐵⃗. L’angolo formato da 𝐹⃗ e 𝐵⃗:
+T: vale sempre 𝜋/2 oppure 3𝜋/2
+F: vale sempre 𝜋/2
+F: vale sempre 3𝜋/2
+U: In quali dei seguenti casi q percorre delle circonferenze:
+T: se 𝐵⃗ e 𝑣⃗ sono perpendicolari e 𝐵⃗ è uniforme
+F: se 𝐵⃗ e 𝑣⃗ sono paralleli e 𝐵⃗ è uniforme
+F: se 𝐵⃗ e 𝑣⃗ sono perpendicolari
+F: se 𝐵⃗ e 𝑣⃗ sono parelleli
+Q: Nella figura la carica q si muove in un piano con velocità iniziale 𝑣⃗ ed il campo magnetico 𝐵⃗ è perpendicolare al piano (entrante nel piano). In quale delle configurazioni la traiettoria di q non è una circonferenza:
+I: q_circonferenza.png
+T: c
+F: a
+F: b
+U: La forza 𝐹⃗:
+T: varia solo la direzione di 𝑣⃗
+F: varia solo la massa di q
+F: varia solo la direzione di 𝑣⃗ e la massa di q
+F: non varia lo stato della particella q
+U: Nel caso in cui la traiettoria percorsa da q sia una circonferenza di raggio R, a parità di tutte le altre condizioni:
+T: R raddoppia se q dimezza
+F: R dimezza se q raddoppia
+F: R raddoppia se q raddoppia
+F: R dimezza se q dimezza
+U: Nel caso in cui la traiettoria percorsa da q sia una circonferenza di raggio R, a parità di tutte le altre condizioni:
+T: il tempo T impiegato a percorrere la circonferenza non dipende da R
+F: il tempo T impiegato a percorrere la circonferenza dipende da R
+U: Nel caso siano presenti sia un campo elettrico sia un campo magnetico, quali di queste affermazioni è vera:
+T: La forza elettrica non può essere nulla.
+F: La forza elettrica è nulla.
+F: La forza magnetica è nulla.
