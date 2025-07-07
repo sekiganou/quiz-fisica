@@ -1,31 +1,149 @@
 Q: Si consideri una particella carica q di massa m in moto con velocità v- in un campo magnetico B-. La forza 𝐹⃗ che il campo magnetico esercita sulla carica è 𝐹⃗ = 𝑞𝑣⃗ × 𝐵⃗. L’angolo formato da 𝐹⃗ e 𝐵⃗:
-T: vale sempre 𝜋/2 oppure 3𝜋/2
-F: vale sempre 𝜋/2
-F: vale sempre 3𝜋/2
+T: Vale sempre 𝜋/2 oppure 3𝜋/2
+F: Vale sempre 𝜋/2
+F: Vale sempre 3𝜋/2
 U: In quali dei seguenti casi q percorre delle circonferenze:
-T: se 𝐵⃗ e 𝑣⃗ sono perpendicolari e 𝐵⃗ è uniforme
-F: se 𝐵⃗ e 𝑣⃗ sono paralleli e 𝐵⃗ è uniforme
-F: se 𝐵⃗ e 𝑣⃗ sono perpendicolari
-F: se 𝐵⃗ e 𝑣⃗ sono parelleli
+T: Se 𝐵⃗ e 𝑣⃗ sono perpendicolari e 𝐵⃗ è uniforme
+F: Se 𝐵⃗ e 𝑣⃗ sono paralleli e 𝐵⃗ è uniforme
+F: Se 𝐵⃗ e 𝑣⃗ sono perpendicolari
+F: Se 𝐵⃗ e 𝑣⃗ sono parelleli
 Q: Nella figura la carica q si muove in un piano con velocità iniziale 𝑣⃗ ed il campo magnetico 𝐵⃗ è perpendicolare al piano (entrante nel piano). In quale delle configurazioni la traiettoria di q non è una circonferenza:
 I: q_circonferenza.png
-T: c
-F: a
-F: b
+T: C
+F: A
+F: B
+F: Nessuna delle alternative
 U: La forza 𝐹⃗:
-T: varia solo la direzione di 𝑣⃗
-F: varia solo la massa di q
-F: varia solo la direzione di 𝑣⃗ e la massa di q
-F: non varia lo stato della particella q
+T: Varia solo la direzione di 𝑣⃗
+F: Varia solo la massa di q
+F: Varia solo la direzione di 𝑣⃗ e la massa di q
+F: Non varia lo stato della particella q
 U: Nel caso in cui la traiettoria percorsa da q sia una circonferenza di raggio R, a parità di tutte le altre condizioni:
 T: R raddoppia se q dimezza
 F: R dimezza se q raddoppia
 F: R raddoppia se q raddoppia
 F: R dimezza se q dimezza
 U: Nel caso in cui la traiettoria percorsa da q sia una circonferenza di raggio R, a parità di tutte le altre condizioni:
-T: il tempo T impiegato a percorrere la circonferenza non dipende da R
-F: il tempo T impiegato a percorrere la circonferenza dipende da R
+T: Il tempo T impiegato a percorrere la circonferenza non dipende da R
+F: Il tempo T impiegato a percorrere la circonferenza dipende da R
 U: Nel caso siano presenti sia un campo elettrico sia un campo magnetico, quali di queste affermazioni è vera:
 T: La forza elettrica non può essere nulla.
 F: La forza elettrica è nulla.
 F: La forza magnetica è nulla.
+Q: Il calcolo di un campo elettrico 𝐸⃗ generato da una distribuzione lineare ed uniforme di carica elettrica (densità lineare di carica λ) può essere fatto mediante la legge di Gauss. Il problema in questione ha:
+T: Simmetria assiale
+F: Simmetria radiale
+F: Simmetria piana
+F: Non ha simmetria
+U: Se la densità lineare di carica λ raddoppia, il campo elettrico in un determinato punto:
+T: Raddoppia
+F: Quadruplica
+F: Dimezza
+U: Nel calcolo di 𝐸⃗, come superficie gaussiana si sceglie:
+T: Un cilindro chiuso il cui asse coincide con la distribuzione di carica
+F: Una sfera centrata sulla distribuzione di carica
+F: Un cubo che contiene la distribuzione di carica
+F: Un piano parallelo alla distribuzione di carica
+U: Le linee di forza del campo elettrico 𝐸⃗ sono:
+T: Dirette radialmente rispetto alla distribuzione di carica
+F: Sempre parallele tra loro
+F: Chiuse su sé stesse
+F: Dirette tangenzialmente alla distribuzione di carica
+U: Si consideri una carica puntiforme q in un punto P distante R dalla distribuzione di carica. In quale di questi punti la forza che q risente è ¼ di quella che risente in P:
+T: In un punto distante 4R dalla distribuzione
+F: In un punto distante 2R dalla distribuzione
+F: In un punto distante 8R dalla distribuzione
+F: In nessun punto perchè il campo elettrico non dipende dalla distanza dal piano della carica
+Q: Un dipolo elettrico è un sistema di due cariche puntiformi +q e -q uguali ma di segno opposto. Il calcolo del campo elettrico E- generato dal dipolo è svolto usando il principio di sovrapposizione. Nel calcolo di 𝐸⃗ è possibile usare il principio di sovrapposizione in quanto:
+T: 𝐸⃗ è un vettore
+F: 𝐸⃗ è uno scalare
+F: Il dipolo è formato da cariche uguali
+F: Il campo elettrico è sempre costante
+U: Si confronti il campo elettrico prodotto da un dipolo 𝐸𝑑⃗ con quello prodotto da una carica puntiforme 𝐸𝑝⃗. L’andamento dei campi elettrici al variare della distanza r dal centro delle cariche è:
+T: 𝐸𝑝⃗ proporzionale a 1/𝑟^2 , 𝐸𝑑⃗ proporzionale a 1/𝑟^3
+F: 𝐸𝑝⃗ proporzionale a 1/𝑟^3 , 𝐸𝑑⃗ proporzionale a 1/𝑟^2
+F: Entrambi proporzionali a 1/𝑟^2
+F: Entrambi proporzionali a 1/𝑟^3
+U: Si considerino un dipolo in cui le cariche distano tra di loro d = 1mm ed i punti P e Q posti nel piano mediano ad una distanza rp = 1m e rq = 2m dal centro del dipolo. Se E(P) = 8V/m:
+T: E(Q) = 1V/m
+F: E(Q) = 2V/m
+F: E(Q) = 4V/m
+F: E(Q) = 0.5V/m
+U: Nel piano mediano del dipolo la direzione del campo elettrico 𝐸⃗ è:
+T: Sempre parallela alla congiungente delle cariche
+F: Sempre perpendicolare alla congiungente delle cariche
+F: Sempre radiale rispetto al centro del dipolo
+F: Sempre nulla
+U: Si consideri un punto P lungo l’asse del dipolo, molto distante dal centro del dipolo. Nel caso in cui le cariche valessero ± 2𝑞 anziché ± 𝑞, il campo elettrico in P non cambierebbe se:
+T: La distanza tra le due cariche si dimezzasse
+F: La distanza tra le due cariche raddoppiasse
+F: La distanza tra le due cariche restasse invariata
+F: Le cariche valessero ± 𝑞 e la distanza si dimezzasse
+Q: Le linee di forza del campo magnetico prodotto da un filo neutro rettilineo percorso da corrente sono:
+T: Cerchi concentrici al filo
+F: Rette parallele al filo
+F: Sempre radiali rispetto al filo
+F: Chiuse su sé stesse attorno al filo
+U: La forza 𝐹⃗ esercitata da un campo magnetico 𝐵⃗ su una carica q in moto con velocità 𝑣⃗ è 𝐹⃗ = 𝑞𝑣⃗ × 𝐵⃗⃗ . Il modulo di 𝐹⃗ è minimo se:
+T: 𝑣⃗ e 𝐵⃗ sono parallele
+F: 𝑣⃗ e 𝐵⃗ sono perpendicolari
+F: 𝑣⃗ è nulla
+F: 𝐵⃗ è nulla
+U La forza 𝐹⃗ esercitata da un campo magnetico 𝐵⃗ su una carica q in moto con velocità 𝑣⃗ è 𝐹⃗ = 𝑞𝑣⃗ × 𝐵⃗⃗ . Il modulo di 𝐹⃗ è massimo se:
+T: 𝑣⃗ e 𝐵⃗ sono perpendicolari
+F: 𝑣⃗ e 𝐵⃗ sono parallele
+F: 𝑣⃗ è nulla
+F: 𝐵⃗ è nulla
+U: Calcolare di quale fattore deve variare il raggio della spira, a parità di resistività, affinché la corrente che la percorre all’istante t = 0 raddoppi:
+T: Fattore 2
+F: Fattore 8
+F: Fattore 4
+U: Le linee di forza del campo magnetico prodotto da un filo rettilineo percorso da corrente sono:
+T: Circonferenze il cui centro sta sul filo
+F: Rette parallele al filo
+F: Sempre radiali rispetto al filo
+F: Linee chiuse che non circondano il filo
+Q: Il calcolo del campo elettrico 𝐸⃗ generato da una distribuzione piana ed uniforme di carica elettrica (densità superficiale di carica σ) può essere fatto mediante la legge di Gauss. Il problema in questione ha:
+T: Simmetria piana
+F: Simmetria radiale
+F: Simmetria assiale
+F: Non ha simmetria
+U: Nel caso di una distribuzione piana ed uniforme di carica elettrica le linee di forza del campo elettrico 𝐸⃗ sono:
+T: Dirette perpendicolarmente al piano della carica con verso opposto nei due lati
+F: Sempre parallele al piano della carica
+F: Chiuse su sé stesse
+F: Dirette tangenzialmente al piano della carica
+U: Se la densità superficiale di carica σ si dimezza, il campo elettrico in un determinato punto:
+T: Dimezza
+F: Raddoppia
+F: Quadruplica
+U: Nel calcolo di 𝐸⃗, come superficie gaussiana si sceglie:
+T: Un cilindro chiuso il cui asse è diretto perpendicolarmente al piano della carica ed è tagliato a metà da questo
+F: Una sfera centrata sulla distribuzione di carica
+F: Un cubo che contiene la distribuzione di carica
+F: Un piano parallelo alla distribuzione di carica
+U: Si consideri una carica puntiforme q posta in un punto P distante d dal piano della carica. In quale di questi punti la forza che q risente è ¼ di quella che risente in P:
+T: In nessun punto perchè il campo elettrico non dipende dalla distanza dal piano della carica
+F: In un punto distante 4R dalla distribuzione
+F: In un punto distante 2R dalla distribuzione
+F: In un punto distante 8R dalla distribuzione
+Q: Siano i1 e i2 le correnti che percorrono due fili rettilinei paralleli mostrati in figura, con i1 entrante nel piano della figura (filo 1) e i2 uscente (filo 2). Quale delle configurazioni rappresenta i campi magnetici prodotti dalle due correnti in un punto situato tra essi:
+I: fili_uscenti.png
+T: C
+F: A
+F: B
+F: Nessuna delle alternative
+U: Se le correnti sono dirette in verso opposto ma uguali in valore assoluto, la forza che si esercita tra i fili:
+T: È repulsiva
+F: È attrattiva
+F: È nulla
+F: Dipende solo dalla distanza tra i fili
+U: Detta d la distanza tra i fili, per quadruplicare la forza che si esercita tra i fili occore:
+T: d/4
+F: d*4
+F: d/2
+F: d*2
+U: Se la corrente i2 raddoppia la forza che risente il filo 1:
+T: Raddoppia
+F: Dimezza
+F: Quadruplica
