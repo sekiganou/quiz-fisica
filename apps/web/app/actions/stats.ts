@@ -1,41 +1,98 @@
+import { Question } from "./questions";
+
 const STATS_KEY = "quiz_stats";
 
-interface Stats {
-  correct: number;
-  total: number;
-}
-function getStats(): Stats {
-  if (typeof window === "undefined") return { correct: 0, total: 0 };
-  const data = localStorage.getItem(STATS_KEY);
-  if (!data) return { correct: 0, total: 0 };
-  try {
-    return JSON.parse(data) as Stats;
-  } catch (error) {
-    console.error("Error parsing stats from localStorage:", error);
-    return { correct: 0, total: 0 };
-  }
+interface UserAnswer {
+  questionId: number;
+  answerId: number;
 }
 
-function saveStats(stats: Stats): void {
-  if (typeof window === "undefined") return;
+interface Quiz {
+  questions: Question[];
+  endDate: Date;
+  userAnswers: UserAnswer[];
+  correctAnswers: number;
+  totalAnswers: number;
+}
+interface QuizStats {
+  quizzes: Quiz[];
+  totalQuizzes: number;
+  totalCorrectAnswers: number;
+  totalAnswers: number;
+}
+function getQuizStats(): QuizStats {
+  const stats = localStorage.getItem(STATS_KEY);
+  if (stats) {
+    return JSON.parse(stats);
+  }
+  return {
+    quizzes: [],
+    totalQuizzes: 0,
+    totalCorrectAnswers: 0,
+    totalAnswers: 0,
+  };
+}
+
+function saveQuizStats(quiz: Quiz): void {
+  const stats = getQuizStats();
+  stats.quizzes.push(quiz);
+  stats.totalQuizzes += 1;
+  stats.totalCorrectAnswers += quiz.correctAnswers;
+  stats.totalAnswers += quiz.totalAnswers;
   localStorage.setItem(STATS_KEY, JSON.stringify(stats));
 }
 
-export function recordAnswer(isCorrect: boolean): void {
-  const stats = getStats();
-  stats.total += 1;
-  if (isCorrect) stats.correct += 1;
-  saveStats(stats);
+export function clearQuizStats(): void {
+  localStorage.removeItem(STATS_KEY);
 }
 
-export function getCorrectAnswers(): number {
-  return getStats().correct;
+export function getQuizStatsSummary(): {
+  totalQuizzes: number;
+  totalCorrectAnswers: number;
+  totalAnswers: number;
+} {
+  const stats = getQuizStats();
+  return {
+    totalQuizzes: stats.totalQuizzes,
+    totalCorrectAnswers: stats.totalCorrectAnswers,
+    totalAnswers: stats.totalAnswers,
+  };
 }
 
-export function getTotalAnswers(): number {
-  return getStats().total;
+export function getLastQuiz(): Quiz | null {
+  const stats = getQuizStats();
+  return stats.quizzes.length > 0
+    ? stats.quizzes[stats.quizzes.length - 1]!
+    : null;
 }
 
-export function resetStats(): void {
-  saveStats({ correct: 0, total: 0 });
+export function saveLastQuiz(
+  questions: Question[],
+  correctAnswers: number,
+  totalAnswers: number
+): void {
+  const quiz: Quiz = {
+    questions,
+    userAnswers: [],
+    endDate: new Date(),
+    correctAnswers,
+    totalAnswers,
+  };
+  saveQuizStats(quiz);
+}
+
+export function UpdateLastQuiz(questionId: number, answerId: number): void {
+  const stats = getQuizStats();
+  if (stats.quizzes.length > 0) {
+    const lastQuiz = stats.quizzes[stats.quizzes.length - 1];
+    if (lastQuiz) {
+      lastQuiz.userAnswers.push({ questionId, answerId });
+      if (answerId == 1) {
+        // Assuming answerId 1 is the correct answer
+        lastQuiz.correctAnswers += 1;
+        lastQuiz.totalAnswers += 1;
+      }
+      localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+    }
+  }
 }

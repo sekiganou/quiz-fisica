@@ -1,12 +1,32 @@
 "use client";
 
-import RandomQuiz from "@/components/RandomQuiz";
+import Quiz from "@/components/Quiz";
 import { Button } from "@workspace/ui/components/button";
 import { useEffect, useState } from "react";
 
 export default function Page() {
   const [questions, setQuestions] = useState([]);
-  const [openRandomQuestion, setOpenRandomQuestion] = useState(false);
+  const [openRandomQuiz, setOpenRandomQuiz] = useState(false);
+  const [openAllQuiz, setOpenAllQuiz] = useState(false);
+
+  const [locked, setLocked] = useState(false);
+
+  const handleOpenRandomQuiz = () => {
+    setOpenRandomQuiz(true);
+    setLocked(true);
+  };
+
+  const handleOpenAllQuiz = () => {
+    setOpenAllQuiz(true);
+    setLocked(true);
+  };
+
+  const handleReset = () => {
+    setOpenRandomQuiz(false);
+    setOpenAllQuiz(false);
+    setLocked(false);
+    setQuestions([]);
+  };
 
   useEffect(() => {
     async function fetchQuestions() {
@@ -16,7 +36,7 @@ export default function Page() {
     }
 
     fetchQuestions();
-  }, []);
+  }, [locked]);
   return (
     <>
       <header className="flex items-center justify-between p-4 border-b">
@@ -31,7 +51,7 @@ export default function Page() {
           Metti alla prova le tue conoscenze con tutte le domande reali d'esame!
         </p>
         <div className="flex flex-col gap-4 sm:flex-row">
-          <Button onClick={() => setOpenRandomQuestion(true)}>
+          <Button onClick={handleOpenRandomQuiz} disabled={locked}>
             <span className="mr-2">
               <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
                 <path
@@ -42,7 +62,7 @@ export default function Page() {
             </span>
             Domande Casuali
           </Button>
-          <Button>
+          <Button disabled={locked}>
             <span className="mr-2">
               <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
                 <path
@@ -53,7 +73,7 @@ export default function Page() {
             </span>
             Scegli Argomento
           </Button>
-          <Button>
+          <Button onClick={handleOpenAllQuiz} disabled={locked}>
             <span className="mr-2">
               <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
                 <path
@@ -66,7 +86,7 @@ export default function Page() {
             </span>
             Tutti i Quiz
           </Button>
-          <Button>
+          <Button disabled={locked}>
             <span className="mr-2">
               <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z" fill="currentColor" />
@@ -75,9 +95,22 @@ export default function Page() {
             Inizia da Domanda
           </Button>
         </div>
-        {openRandomQuestion && (
+        {openRandomQuiz && (
           <div className="mt-6 w-full max-w-2xl">
-            <RandomQuiz questions={questions} />
+            <Quiz
+              questions={questions}
+              totalQuestions={1}
+              handleReset={handleReset}
+            />
+          </div>
+        )}
+        {openAllQuiz && (
+          <div className="mt-6 w-full max-w-2xl">
+            <Quiz
+              questions={questions}
+              totalQuestions={questions.length}
+              handleReset={handleReset}
+            />
           </div>
         )}
       </main>
