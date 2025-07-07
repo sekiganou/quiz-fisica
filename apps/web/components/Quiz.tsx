@@ -1,7 +1,7 @@
 import { Question } from "@/app/actions/questions";
 import { Card, CardContent, CardHeader } from "@workspace/ui/components/card";
 import { Progress } from "@workspace/ui/components/progress";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@workspace/ui/components/button";
 import {
@@ -15,7 +15,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodTypeAny } from "zod";
 import { shuffleArray } from "@/lib/shuffleArray";
-import { getLastQuiz, saveLastQuiz } from "@/app/actions/stats";
+import {
+  getLastQuiz,
+  saveLastQuiz,
+  updateLastQuiz,
+  UserAnswer,
+} from "@/app/actions/stats";
 import {
   RadioGroup,
   RadioGroupItem,
@@ -24,6 +29,7 @@ import { Label } from "@workspace/ui/components/label";
 import { renderQuestion } from "./renderQuestion";
 import { GreenTick } from "./GreenTick";
 import { RedCross } from "./RedCross";
+import ReviewQuiz from "./ReviewQuiz";
 
 function shuffleQuestions(questions: Question[]): Question[] {
   const shuffledQuestions = shuffleArray(
@@ -70,40 +76,64 @@ function getAllTrueAnswersHelper(
 
 export default function Quiz({
   questions,
-  totalQuestions,
+  quizQuestions,
   handleReset,
+  handleOpenReview,
 }: {
   questions: Question[];
-  totalQuestions?: number;
+  quizQuestions?: number;
   handleReset: () => void;
+  handleOpenReview: () => void;
 }) {
-  let shuffledQuestions = shuffleQuestions(questions);
-  shuffledQuestions = shuffledQuestions.slice(
-    0,
-    totalQuestions || shuffledQuestions.length
+  const [shuffledQuestions] = useState(
+    shuffleQuestions(questions).slice(0, quizQuestions || questions.length)
   );
-  // const [correctUserAnswers, setcorrectUserAnswers] = useState(0);
+
   const [correctAnswers, setCorrectAnswers] = useState<Map<number, string>>(
     mapCorrectAnswers(shuffledQuestions)
   );
-  const totalAnswers = correctAnswers.size;
-  saveLastQuiz(shuffledQuestions, 0, totalAnswers);
+  const [lastQuiz, setLastQuiz] = useState(() => {
+    // Only save the quiz if it hasn't been saved yet
+    return getLastQuiz() ?? saveLastQuiz(shuffledQuestions);
+  });
 
   const [currentPercent, setCurrentPercent] = useState(0);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(1);
-  const [currentQuestion, setCurrentQuestion] = useState(
-    shuffledQuestions[currentQuestionIndex]
-  );
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
+  // Always derive currentQuestion from currentQuestionIndex and shuffledQuestions
   const [showFollowUp, setShowFollowUp] = useState(false);
   const [correctUserAnswers, setCorrectUserAnswers] = useState(0);
   const [wrongUserAnswers, setWrongUserAnswers] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState<Map<number, string>>(
-    new Map()
-  );
+
+  const [openReview, setOpenReview] = useState(false);
+  const [shouldOpenReview, setShouldOpenReview] = useState(false);
+
+  const [userAnswers, setUserAnswers] = useState<Array<UserAnswer>>([]);
+
+  // Effect to handle opening review after lastQuiz is updated
+  useEffect(() => {
+    if (shouldOpenReview && lastQuiz.userAnswers.length > 0) {
+      handleOpenReview();
+      handleReset();
+      setShouldOpenReview(false);
+    }
+  }, [lastQuiz, shouldOpenReview, handleOpenReview, handleReset]);
 
   const handleMoveToNextQuestion = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1);
-    setCurrentQuestion(shuffledQuestions[currentQuestionIndex]);
+
+    // Check if we've reached the end
+    if (currentQuestionIndex >= shuffledQuestions.length - 1) {
+      setLastQuiz((prev) => {
+        const updatedQuiz = { ...prev, userAnswers: userAnswers };
+        updateLastQuiz(userAnswers);
+        return updatedQuiz;
+      });
+      setShouldOpenReview(true);
+
+      return;
+    }
+
     setShowFollowUp(false);
     form.reset();
   };
@@ -133,10 +163,11 @@ export default function Quiz({
     return schema;
   }
 
-  const rawSchema = buildSchemaFromQuestion(
-    currentQuestion!,
-    `${currentQuestion!.id}`
-  );
+  // Only create schema if we have a valid current question
+  const currentQuestion = shuffledQuestions[currentQuestionIndex];
+  const rawSchema = currentQuestion
+    ? buildSchemaFromQuestion(currentQuestion, `${currentQuestion.id}`)
+    : {};
   const FormSchema = z.object(rawSchema);
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -146,13 +177,24 @@ export default function Quiz({
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
     let correct = 0;
     let wrong = 0;
+    let userAnswersMap = new Array<UserAnswer>();
 
     Object.entries(data).forEach(([questionId, answer]) => {
       const correctAnswer = correctAnswers.get(Number(questionId));
       if (answer === correctAnswer) {
+        userAnswersMap.push({
+          questionId: Number(questionId),
+          answerText: answer,
+          isCorrect: true,
+        });
         correct += 1;
       } else {
         wrong += 1;
+        userAnswersMap.push({
+          questionId: Number(questionId),
+          answerText: answer,
+          isCorrect: false,
+        });
       }
     });
 
@@ -160,17 +202,25 @@ export default function Quiz({
     setWrongUserAnswers((prev) => prev + wrong);
 
     setCurrentPercent(
-      Math.round((currentQuestionIndex / shuffledQuestions.length) * 100)
+      Math.round((currentQuestionIndex + 1 / shuffledQuestions.length) * 100)
     );
 
     setShowFollowUp(true);
+
+    setUserAnswers((prev) => {
+      const newAnswers = prev;
+      newAnswers.push(...userAnswersMap);
+      return newAnswers;
+    });
   };
+
+  console.log("lastQuiz", lastQuiz);
 
   return (
     <>
       <hr className="my-4" />
       <h2 className="text-xl font-semibold mb-2">
-        Quiz causale ({totalQuestions} domande)
+        Quiz causale ({quizQuestions} domande)
       </h2>
       <div className="flex items-center gap-4 mb-2">
         <Progress value={currentPercent} className="flex-1" />
@@ -186,7 +236,7 @@ export default function Quiz({
         </div>
       </div>
       <h3 className="text-md font-medium mb-4">
-        Domanda {currentQuestionIndex} di {totalQuestions}
+        Domanda {currentQuestionIndex + 1} di {quizQuestions}
       </h3>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -235,7 +285,9 @@ export default function Quiz({
                     />
                   </svg>
                 </span>
-                Prossima Domanda
+                {currentQuestionIndex >= shuffledQuestions.length - 1
+                  ? "Rivedi Risultati"
+                  : "Domanda Successiva"}
               </Button>
             )}
             <Button variant={"destructive"} onClick={handleReset}>

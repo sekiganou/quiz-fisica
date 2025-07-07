@@ -1,6 +1,7 @@
 "use client";
 
 import Quiz from "@/components/Quiz";
+import ReviewQuiz from "@/components/ReviewQuiz";
 import { Button } from "@workspace/ui/components/button";
 import { useEffect, useState } from "react";
 
@@ -8,6 +9,11 @@ export default function Page() {
   const [questions, setQuestions] = useState([]);
   const [openRandomQuiz, setOpenRandomQuiz] = useState(false);
   const [openAllQuiz, setOpenAllQuiz] = useState(false);
+  const [openReview, setOpenReview] = useState(false);
+
+  const handleOpenReview = () => {
+    setOpenReview(true);
+  };
 
   const [locked, setLocked] = useState(false);
 
@@ -99,8 +105,9 @@ export default function Page() {
           <div className="mt-6 w-full max-w-2xl">
             <Quiz
               questions={questions}
-              totalQuestions={1}
+              quizQuestions={2}
               handleReset={handleReset}
+              handleOpenReview={handleOpenReview}
             />
           </div>
         )}
@@ -108,9 +115,15 @@ export default function Page() {
           <div className="mt-6 w-full max-w-2xl">
             <Quiz
               questions={questions}
-              totalQuestions={questions.length}
+              quizQuestions={questions.length}
               handleReset={handleReset}
+              handleOpenReview={handleOpenReview}
             />
+          </div>
+        )}
+        {openReview && (
+          <div className="mt-6 w-full max-w-2xl">
+            <ReviewQuiz />
           </div>
         )}
       </main>

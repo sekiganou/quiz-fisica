@@ -2,21 +2,19 @@ import { Question } from "./questions";
 
 const STATS_KEY = "quiz_stats";
 
-interface UserAnswer {
+export interface UserAnswer {
   questionId: number;
-  answerId: number;
+  answerText: string;
+  isCorrect: boolean;
 }
 
 interface Quiz {
   questions: Question[];
-  endDate: Date;
+  startDate: Date;
   userAnswers: UserAnswer[];
-  correctAnswers: number;
-  totalAnswers: number;
 }
 interface QuizStats {
   quizzes: Quiz[];
-  totalQuizzes: number;
   totalCorrectAnswers: number;
   totalAnswers: number;
 }
@@ -27,7 +25,6 @@ function getQuizStats(): QuizStats {
   }
   return {
     quizzes: [],
-    totalQuizzes: 0,
     totalCorrectAnswers: 0,
     totalAnswers: 0,
   };
@@ -36,9 +33,10 @@ function getQuizStats(): QuizStats {
 function saveQuizStats(quiz: Quiz): void {
   const stats = getQuizStats();
   stats.quizzes.push(quiz);
-  stats.totalQuizzes += 1;
-  stats.totalCorrectAnswers += quiz.correctAnswers;
-  stats.totalAnswers += quiz.totalAnswers;
+  stats.totalCorrectAnswers += quiz.userAnswers.filter(
+    (answer) => answer.isCorrect
+  ).length;
+  stats.totalAnswers += quiz.userAnswers.length;
   localStorage.setItem(STATS_KEY, JSON.stringify(stats));
 }
 
@@ -53,7 +51,7 @@ export function getQuizStatsSummary(): {
 } {
   const stats = getQuizStats();
   return {
-    totalQuizzes: stats.totalQuizzes,
+    totalQuizzes: stats.quizzes.length,
     totalCorrectAnswers: stats.totalCorrectAnswers,
     totalAnswers: stats.totalAnswers,
   };
@@ -66,32 +64,22 @@ export function getLastQuiz(): Quiz | null {
     : null;
 }
 
-export function saveLastQuiz(
-  questions: Question[],
-  correctAnswers: number,
-  totalAnswers: number
-): void {
+export function saveLastQuiz(questions: Question[]): Quiz {
   const quiz: Quiz = {
     questions,
     userAnswers: [],
-    endDate: new Date(),
-    correctAnswers,
-    totalAnswers,
+    startDate: new Date(),
   };
   saveQuizStats(quiz);
+  return quiz;
 }
 
-export function UpdateLastQuiz(questionId: number, answerId: number): void {
+export function updateLastQuiz(userAnswers: UserAnswer[]): void {
   const stats = getQuizStats();
   if (stats.quizzes.length > 0) {
     const lastQuiz = stats.quizzes[stats.quizzes.length - 1];
     if (lastQuiz) {
-      lastQuiz.userAnswers.push({ questionId, answerId });
-      if (answerId == 1) {
-        // Assuming answerId 1 is the correct answer
-        lastQuiz.correctAnswers += 1;
-        lastQuiz.totalAnswers += 1;
-      }
+      lastQuiz.userAnswers = userAnswers;
       localStorage.setItem(STATS_KEY, JSON.stringify(stats));
     }
   }

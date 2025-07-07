@@ -15,8 +15,6 @@ import Image from "next/image";
 import { UseFormReturn } from "react-hook-form";
 import { GreenTick } from "./GreenTick";
 import { RedCross } from "./RedCross";
-import { number, set } from "zod/v4-mini";
-import { Dispatch, SetStateAction, useState } from "react";
 
 export const renderQuestion = (
   question: Question,
