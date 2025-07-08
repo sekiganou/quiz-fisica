@@ -1,0 +1,375 @@
+Q: Si consideri una particella carica q di massa m in moto con velocità v- in un campo magnetico B-. La forza 𝐹⃗ che il campo magnetico esercita sulla carica è 𝐹⃗ = 𝑞𝑣⃗ × 𝐵⃗. L'angolo formato da 𝐹⃗ e 𝐵⃗:
+I: traiettoria_q.png
+T: Vale sempre 𝜋/2 oppure 3𝜋/2
+F: Vale sempre 𝜋/2
+F: Vale sempre 3𝜋/2
+U: In quali dei seguenti casi q percorre delle circonferenze:
+T: Se 𝐵⃗ e 𝑣⃗ sono perpendicolari e 𝐵⃗ è uniforme
+F: Se 𝐵⃗ e 𝑣⃗ sono paralleli e 𝐵⃗ è uniforme
+F: Se 𝐵⃗ e 𝑣⃗ sono perpendicolari
+F: Se 𝐵⃗ e 𝑣⃗ sono parelleli
+U: Nella figura la carica q si muove in un piano con velocità iniziale 𝑣⃗ ed il campo magnetico 𝐵⃗ è perpendicolare al piano (entrante nel piano). In quale delle configurazioni la traiettoria di q non è una circonferenza:
+T: C
+F: A
+F: B
+F: Nessuna delle alternative
+U: La forza 𝐹⃗:
+T: Varia solo la direzione di 𝑣⃗
+F: Varia solo la massa di q
+F: Varia solo la direzione di 𝑣⃗ e la massa di q
+F: Non varia lo stato della particella q
+U: Nel caso in cui la traiettoria percorsa da q sia una circonferenza di raggio R, a parità di tutte le altre condizioni:
+T: R raddoppia se q dimezza
+F: R dimezza se q raddoppia
+F: R raddoppia se q raddoppia
+F: R dimezza se q dimezza
+U: Nel caso in cui la traiettoria percorsa da q sia una circonferenza di raggio R, a parità di tutte le altre condizioni:
+T: Il tempo T impiegato a percorrere la circonferenza non dipende da R
+F: Il tempo T impiegato a percorrere la circonferenza dipende da R
+U: Nel caso siano presenti sia un campo elettrico sia un campo magnetico, quali di queste affermazioni è vera:
+T: La forza elettrica non può essere nulla.
+F: La forza elettrica è nulla.
+F: La forza magnetica è nulla.
+Q: Il calcolo di un campo elettrico 𝐸⃗ generato da una distribuzione lineare ed uniforme di carica elettrica (densità lineare di carica λ) può essere fatto mediante la legge di Gauss. Il problema in questione ha:
+T: Simmetria assiale
+F: Simmetria radiale
+F: Simmetria piana
+F: Non ha simmetria
+U: Se la densità lineare di carica λ raddoppia, il campo elettrico in un determinato punto:
+T: Raddoppia
+F: Quadruplica
+F: Dimezza
+U: Nel calcolo di 𝐸⃗, come superficie gaussiana si sceglie:
+T: Un cilindro chiuso il cui asse coincide con la distribuzione di carica
+F: Una sfera centrata sulla distribuzione di carica
+F: Un cubo che contiene la distribuzione di carica
+F: Un piano parallelo alla distribuzione di carica
+U: Le linee di forza del campo elettrico 𝐸⃗ sono:
+T: Dirette radialmente rispetto alla distribuzione di carica
+F: Sempre parallele tra loro
+F: Chiuse su sé stesse
+F: Dirette tangenzialmente alla distribuzione di carica
+U: Si consideri una carica puntiforme q in un punto P distante R dalla distribuzione di carica. In quale di questi punti la forza che q risente è ¼ di quella che risente in P:
+T: In un punto distante 4R dalla distribuzione
+F: In un punto distante 2R dalla distribuzione
+F: In un punto distante 8R dalla distribuzione
+F: In nessun punto perchè il campo elettrico non dipende dalla distanza dal piano della carica
+Q: Un dipolo elettrico è un sistema di due cariche puntiformi +q e -q uguali ma di segno opposto. Il calcolo del campo elettrico E- generato dal dipolo è svolto usando il principio di sovrapposizione. Nel calcolo di 𝐸⃗ è possibile usare il principio di sovrapposizione in quanto:
+T: 𝐸⃗ è un vettore
+F: 𝐸⃗ è uno scalare
+F: Il dipolo è formato da cariche uguali
+F: Il campo elettrico è sempre costante
+U: Si confronti il campo elettrico prodotto da un dipolo 𝐸𝑑⃗ con quello prodotto da una carica puntiforme 𝐸𝑝⃗. L'andamento dei campi elettrici al variare della distanza r dal centro delle cariche è:
+T: 𝐸𝑝⃗ proporzionale a 1/𝑟^2 , 𝐸𝑑⃗ proporzionale a 1/𝑟^3
+F: 𝐸𝑝⃗ proporzionale a 1/𝑟^3 , 𝐸𝑑⃗ proporzionale a 1/𝑟^2
+F: Entrambi proporzionali a 1/𝑟^2
+F: Entrambi proporzionali a 1/𝑟^3
+U: Si considerino un dipolo in cui le cariche distano tra di loro d = 1mm ed i punti P e Q posti nel piano mediano ad una distanza rp = 1m e rq = 2m dal centro del dipolo. Se E(P) = 8V/m:
+T: E(Q) = 1V/m
+F: E(Q) = 2V/m
+F: E(Q) = 4V/m
+F: E(Q) = 0.5V/m
+U: Nel piano mediano del dipolo la direzione del campo elettrico 𝐸⃗ è:
+T: Sempre parallela alla congiungente delle cariche
+F: Sempre perpendicolare alla congiungente delle cariche
+F: Sempre radiale rispetto al centro del dipolo
+F: Sempre nulla
+U: Si consideri un punto P lungo l'asse del dipolo, molto distante dal centro del dipolo. Nel caso in cui le cariche valessero ± 2𝑞 anziché ± 𝑞, il campo elettrico in P non cambierebbe se:
+T: La distanza tra le due cariche si dimezzasse
+F: La distanza tra le due cariche raddoppiasse
+F: La distanza tra le due cariche restasse invariata
+F: Le cariche valessero ± 𝑞 e la distanza si dimezzasse
+Q: Le linee di forza del campo magnetico prodotto da un filo neutro rettilineo percorso da corrente sono:
+T: Cerchi concentrici al filo
+F: Rette parallele al filo
+F: Sempre radiali rispetto al filo
+F: Chiuse su sé stesse attorno al filo
+U: La forza 𝐹⃗ esercitata da un campo magnetico 𝐵⃗ su una carica q in moto con velocità 𝑣⃗ è 𝐹⃗ = 𝑞𝑣⃗ × 𝐵⃗⃗ . Il modulo di 𝐹⃗ è minimo se:
+T: 𝑣⃗ e 𝐵⃗ sono parallele
+F: 𝑣⃗ e 𝐵⃗ sono perpendicolari
+F: 𝑣⃗ è nulla
+F: 𝐵⃗ è nulla
+U: La forza 𝐹⃗ esercitata da un campo magnetico 𝐵⃗ su una carica q in moto con velocità 𝑣⃗ è 𝐹⃗ = 𝑞𝑣⃗ × 𝐵⃗⃗ . Il modulo di 𝐹⃗ è massimo se:
+T: 𝑣⃗ e 𝐵⃗ sono perpendicolari
+F: 𝑣⃗ e 𝐵⃗ sono parallele
+F: 𝑣⃗ è nulla
+F: 𝐵⃗ è nulla
+U: Calcolare di quale fattore deve variare il raggio della spira, a parità di resistività, affinché la corrente che la percorre all'istante t = 0 raddoppi:
+T: Fattore 2
+F: Fattore 8
+F: Fattore 4
+U: Le linee di forza del campo magnetico prodotto da un filo rettilineo percorso da corrente sono:
+T: Circonferenze il cui centro sta sul filo
+F: Rette parallele al filo
+F: Sempre radiali rispetto al filo
+F: Linee chiuse che non circondano il filo
+Q: Il calcolo del campo elettrico 𝐸⃗ generato da una distribuzione piana ed uniforme di carica elettrica (densità superficiale di carica σ) può essere fatto mediante la legge di Gauss. Il problema in questione ha:
+T: Simmetria piana
+F: Simmetria radiale
+F: Simmetria assiale
+F: Non ha simmetria
+U: Nel caso di una distribuzione piana ed uniforme di carica elettrica le linee di forza del campo elettrico 𝐸⃗ sono:
+T: Dirette perpendicolarmente al piano della carica con verso opposto nei due lati
+F: Sempre parallele al piano della carica
+F: Chiuse su sé stesse
+F: Dirette tangenzialmente al piano della carica
+U: Se la densità superficiale di carica σ si dimezza, il campo elettrico in un determinato punto:
+T: Dimezza
+F: Raddoppia
+F: Quadruplica
+U: Nel calcolo di 𝐸⃗, come superficie gaussiana si sceglie:
+T: Un cilindro chiuso il cui asse è diretto perpendicolarmente al piano della carica ed è tagliato a metà da questo
+F: Una sfera centrata sulla distribuzione di carica
+F: Un cubo che contiene la distribuzione di carica
+F: Un piano parallelo alla distribuzione di carica
+U: Si consideri una carica puntiforme q posta in un punto P distante d dal piano della carica. In quale di questi punti la forza che q risente è ¼ di quella che risente in P:
+T: In nessun punto perchè il campo elettrico non dipende dalla distanza dal piano della carica
+F: In un punto distante 4R dalla distribuzione
+F: In un punto distante 2R dalla distribuzione
+F: In un punto distante 8R dalla distribuzione
+Q: Siano i1 e i2 le correnti che percorrono due fili rettilinei paralleli mostrati in figura, con i1 entrante nel piano della figura (filo 1) e i2 uscente (filo 2). Quale delle configurazioni rappresenta i campi magnetici prodotti dalle due correnti in un punto situato tra essi:
+I: fili_uscenti.png
+T: C
+F: A
+F: B
+F: Nessuna delle alternative
+U: Se le correnti sono dirette in verso opposto ma uguali in valore assoluto, la forza che si esercita tra i fili:
+T: È repulsiva
+F: È attrattiva
+F: È nulla
+F: Dipende solo dalla distanza tra i fili
+U: Detta d la distanza tra i fili, per quadruplicare la forza che si esercita tra i fili occore:
+T: d/4
+F: d*4
+F: d/2
+F: d*2
+U: Se la corrente i2 raddoppia la forza che risente il filo 1:
+T: Raddoppia
+F: Dimezza
+F: Quadruplica
+Q: Nei quesiti seguenti si consideri un dipolo con le cariche sull'asse x e centro del dipolo l'origine x = 0. a) Lungo l'asse del dipolo la direzione del campo elettrico 𝐸⃗ è:
+T: sempre diretta lungo l'asse delle x
+F: sempre perpendicolare all'asse delle x
+F: sempre nulla
+F: sempre radiale rispetto al centro del dipolo
+U: b) Consideriamo il potenziale elettrico generato dal dipolo in un punto P = (0, a, 0) del piano mediano. Detti 𝑉+(𝑃) e 𝑉−(𝑃) i potenziali generati rispettivamente dalla carica +q e -q nel punto P, qual è la relazione tra 𝑉+(𝑃) e 𝑉−(𝑃):
+T: 𝑉−(𝑃) = −𝑉+(𝑃)
+F: 𝑉−(𝑃) = 𝑉+(𝑃)
+F: 𝑉−(𝑃) = 0
+F: 𝑉+(𝑃) = 0
+U: c) Consideriamo il potenziale elettrico generato dal dipolo nel punto 𝑃 = (0, 𝑎, 0) e nel punto 𝑄 = (0, √𝑎, √𝑎). Qual è la relazione tra V(P) e V(Q):
+T: 𝑉(𝑃) = 𝑉(𝑄)
+F: 𝑉(𝑃) > 𝑉(𝑄)
+F: 𝑉(𝑃) < 𝑉(𝑄)
+F: 𝑉(𝑄) = 0
+U: d) Consideriamo il potenziale elettrico generato dal dipolo nel punto P = (0, a, 0) e nel punto 𝑄 = (0, 2𝑎, 0). Qual è la relazione tra V(P) e V(Q):
+T: 𝑉(𝑃) = 𝑉(𝑄)
+F: 𝑉(𝑃) > 𝑉(𝑄)
+F: 𝑉(𝑃) < 𝑉(𝑄)
+F: 𝑉(𝑄) = 0
+Q: Si considerino un semiconduttore intrinseco, ad es. il silicio (Si), ed un conduttore ohmico, ad es. il rame (Cu). Dette 𝑛(𝑆𝑖) e 𝑛(𝐶𝑢) la densità dei portatori di carica nei due materiali, quali di queste affermazioni è vera?
+T: 𝑛(𝑆𝑖) < 𝑛(𝐶𝑢)
+F: 𝑛(𝑆𝑖) = 𝑛(𝐶𝑢)
+F: 𝑛(𝑆𝑖) > 𝑛(𝐶𝑢)
+F: 𝑛(𝐶𝑢) = 0
+U: Quali tra le seguenti affermazioni è corretta?
+T: Un semiconduttore drogato di tipo n contiene impurità del V gruppo
+F: Un semiconduttore drogato di tipo n contiene impurità del III gruppo
+F: I semiconduttori drogati non conducono elettricità
+F: La conduzione nei semiconduttori drogati dipende solo dalla temperatura
+U: Quali dei seguenti grafici descrive al meglio la caratteristica IV di una giunzione pn polarizzata direttamente?
+I: semiconduttoreIntrinseco.png
+T: b
+F: a
+F: c
+Q: Si consideri il condensatore piano mostrato in figura. Sia S la superficie delle armature e d la loro distanza. Sia 𝑉0 = 𝑉(𝑆1) – 𝑉(𝑆2) > 0 la differenza di potenziale tra le armature. In quali dei seguenti casi la capacità del condensatore raddoppia?
+I: condensatore_pg6.png
+T: Dimezzando d
+F: Raddoppiando d
+F: Dimezzando la superficie S
+F: Raddoppiando la tensione V₀
+U: Se raddoppia la carica sulle armature, il modulo del campo elettrico 𝐸⃗⃗ presente tra le armature:
+T: Raddoppia
+F: Si dimezza
+F: Resta invariato
+F: Diventa nullo
+U: Per il modulo del campo elettrico 𝐸⃗ presente tra le armature vale la seguente relazione:
+T: 𝐸(𝑥 = 0) = 𝐸(𝑥 = 𝑑/2) = 𝐸(𝑥 = 𝑑)
+F: 𝐸 varia linearmente con x
+F: 𝐸 è massimo a x = d/2
+F: 𝐸 è nullo a x = 0
+U: Il campo elettrico 𝐸- tra le armature:
+T: Ha lo stesso verso del versore i
+F: Ha verso opposto a i
+F: È perpendicolare a i
+F: È nullo ovunque
+U: Detta C la capacità del condensatore, se 𝑉(𝑆1) = 𝑉₀ e 𝑉(𝑆2) = 0 la carica sulle armature è:
+T: 𝑄(𝑆1) = +𝐶𝑉₀ e 𝑄(𝑆2) = −𝐶𝑉₀
+F: 𝑄(𝑆1) = −𝐶𝑉₀ e 𝑄(𝑆2) = +𝐶𝑉₀
+F: 𝑄(𝑆1) = 𝑄(𝑆2) = 0
+F: 𝑄(𝑆1) = 𝑄(𝑆2) = +𝐶𝑉₀
+Q: Due condensatori sono in serie se:
+T: Sono percorsi dalla stessa corrente
+F: Hanno la stessa tensione ai capi
+F: Sono collegati tra loro in parallelo
+F: Hanno la stessa capacità
+U: Due condensatori sono in parallelo se:
+T: La d.d.p. ai loro capi è la stessa
+F: Sono attraversati dalla stessa corrente
+F: Hanno lo stesso valore di capacità
+F: Sono collegati in serie
+U: Avendo a disposizione due condensatori C1 e C2 con C1 < C2, il valore minimo della capacità si ha:
+T: Collegando C1 e C2 in serie
+F: Collegando C1 e C2 in parallelo
+F: Usando solo C2
+F: Collegandoli in cortocircuito
+U: Avendo a disposizione due condensatori C1 e C2 con C1 < C2, il valore massimo della capacità si ha:
+T: Collegando C1 e C2 in parallelo
+F: Collegando C1 e C2 in serie
+F: Usando solo C1
+F: Collegandoli con polarità opposte
+U: Collegando in serie due condensatori entrambi di capacità C, la capacità equivalente vale:
+T: C/2
+F: 2C
+F: C
+F: C²
+U: Due resistori sono in parallelo se:
+T: La d.d.p. ai loro capi è la stessa
+F: Sono attraversati dalla stessa corrente
+F: Hanno la stessa resistenza
+F: Sono collegati uno dopo l'altro
+U: Due resistori sono in serie se:
+T: Sono percorsi dalla stessa corrente
+F: Hanno la stessa tensione ai capi
+F: Sono collegati in parallelo
+F: Hanno lo stesso valore
+U: Avendo a disposizione due resistori R1 e R2 con R1 < R2, il valore minimo della resistenza si ha:
+T: Collegando R1 e R2 in parallelo
+F: Collegando R1 e R2 in serie
+F: Usando solo R2
+F: Usando solo R1
+U: Avendo a disposizione due resistori R1 e R2 con R1 < R2, il valore massimo della resistenza si ha:
+T: Collegando R1 e R2 in serie
+F: Collegando R1 e R2 in parallelo
+F: Usando solo R1
+F: Collegandoli in corto circuito
+U: Collegando in parallelo due resistori entrambi di resistenza R, la resistenza equivalente vale:
+T: R/2
+F: 2R
+F: R
+F: R²
+Q: Nei quesiti seguenti si consideri un dipolo con le cariche sull’asse x e centro del dipolo l’origine x = 0. a) Lungo l'asse del dipolo la direzione del campo elettrico 𝐸⃗ è:
+T: Sempre diretta lungo l'asse delle x
+F: Perpendicolare all'asse delle x
+F: Radiale
+F: Circolare
+U: b) Consideriamo il potenziale elettrico generato dal dipolo in un punto P = (0, a, 0) del piano mediano. Detti 𝑉+(𝑃) e 𝑉−(𝑃) i potenziali generati rispettivamente dalla carica +q e -q nel punto P, qual è la relazione tra 𝑉+(𝑃) e 𝑉−(𝑃):
+T: 𝑉−(𝑃) = −𝑉+(𝑃)
+F: 𝑉−(𝑃) = 𝑉+(𝑃)
+F: 𝑉−(𝑃) > 𝑉+(𝑃)
+F: 𝑉+(𝑃) = 0
+U: c) Consideriamo il potenziale elettrico generato dal dipolo nel punto 𝑃 = (0, 𝑎, 0) e nel punto 𝑄 = (0, √𝑎, √𝑎). Qual è la relazione tra V(P) e V(Q):
+T: 𝑉(𝑃) = 𝑉(𝑄)
+F: 𝑉(𝑃) > 𝑉(𝑄)
+F: 𝑉(𝑃) < 𝑉(𝑄)
+F: 𝑉(𝑄) = 0
+U: d) Consideriamo il potenziale elettrico generato dal dipolo nel punto P = (0, a, 0) e nel punto Q = (0, 2a, 0). Qual è la relazione tra V(P) e V(Q):
+T: 𝑉(𝑃) = 𝑉(𝑄)
+F: 𝑉(𝑃) > 𝑉(𝑄)
+F: 𝑉(𝑃) < 𝑉(𝑄)
+F: 𝑉(𝑄) = 0
+F: nessuna delle alternative
+Q: Si consideri un transistor NMOS usato come interruttore controllato per il quale 𝑉𝑔𝑠 = +5𝑉. Quale delle seguenti affermazioni è vera?
+I: Transistor_nmos2.png
+T: Il transistor si comporta come un interruttore chiuso ("ON")
+F: Il transistor è spento
+F: Il transistor non conduce
+F: Il transistor è in interdizione
+U: Quale funzione logica elementare è rappresentata dal circuito mostrato in figura?
+T: NAND
+F: AND
+F: NOR
+F: OR
+Q: La legge di Ampere afferma ∮ 𝐵⃗ ∙ 𝑑𝑠⃗𝛾 = 4𝜋𝑘𝑚 ∑ 𝑖𝑘𝑘 dove γ è un percorso chiuso. La figura mostra un tratto di lunghezza 𝑙 di un solenoide rettilineo formato da N = 20 spire. Il solenoide è percorso da una corrente stazionaria i. Nel caso della figura a), quale di queste affermazioni è corretta?
+I: solenoide.png
+T: ∫𝑐→𝑏 𝐵⃗ ∙ 𝑑𝑠⃗  + ∫𝑎→𝑑 𝐵⃗ ∙ 𝑑𝑠⃗  = 0
+F: ∫𝑐→𝑏 𝐵⃗ ∙ 𝑑𝑠⃗  + ∫𝑎→𝑑 𝐵⃗ ∙ 𝑑𝑠⃗  != 0
+F: ∫𝑐→𝑏 𝐵⃗ ∙ 𝑑𝑠⃗  + ∫𝑎→𝑑 𝐵⃗ ∙ 𝑑𝑠⃗  > 0
+F: ∫𝑐→𝑏 𝐵⃗ ∙ 𝑑𝑠⃗  + ∫𝑎→𝑑 𝐵⃗ ∙ 𝑑𝑠⃗  < 0
+U: Nel caso del percorso γ della figura a), il valore di ∑𝑘 𝑖𝑘 è:
+T: 5i
+F: 0
+F: 20i
+F: i
+U: Nel caso del percorso γ della figura b), il valore di ∮ 𝐵⃗⃗ ∙ 𝑑𝑠⃗ 𝛾 è:
+T: 0
+F: 5i
+F: 4πkm5i
+F: 20i
+U: Nel caso del percorso γ della figura c), il valore di ∮ 𝐵⃗⃗ ∙ 𝑑𝑠⃗ 𝛾 è:
+T: 4πkm5i
+F: 0
+F: 4πkm20i
+F: πkm5i
+Q: Si consideri un transistor NMOS usato come interruttore controllato per il quale 𝑉𝑔𝑠 = −1𝑉. Quale delle seguenti affermazioni è vera?
+I: Transistor_nmos.png
+T: Il transistor si comporta come un interruttore aperto ("OFF")
+F: Il transistor è in saturazione
+F: Il transistor conduce corrente
+F: Il transistor è nello stato "ON"
+U: Quale funzione logica elementare è rappresentata dal circuito mostrato in figura?
+T: NOR
+F: OR
+F: AND
+F: NAND
+Q: Quali delle seguenti caratteristiche della forza di Coulomb non è usata per dimostrare il fatto che sia una forza conservativa:
+T: La forza di Coulomb dipende dalla distanza r tra le cariche come 1/(r^2)
+F: Il modulo della forza dipende solo dalla distanza tra le cariche
+F: La forza può essere derivata da un potenziale scalare
+F: Il lavoro lungo un percorso chiuso è nullo
+U: Una carica positiva q si sposta nella direzione e verso del campo elettrico 𝐸⃗. Quali delle seguenti affermazioni è vera:
+T: L'energia potenziale di q diminuisce
+F: Il campo elettrico compie lavoro nullo su q
+F: La forza di Coulomb è perpendicolare allo spostamento
+F: La carica q si muove spontaneamente contro il campo
+U: Una carica positiva q si sposta nella direzione perpendicolare al campo elettrico 𝐸⃗. Quali delle seguenti affermazioni è vera:
+T: L'energia potenziale di q non cambia
+F: Il campo elettrico compie lavoro positivo su q
+F: Il potenziale elettrico cambia
+F: La forza elettrica accelera la carica lungo il campo
+U: Si considerino il campo elettrico prodotto da una carica puntiforme q1 e due punti A e B posti alla stessa distanza da q1. Il lavoro fatto da 𝐸⃗ per portare una carica q2 da A a B:
+T: È sempre nullo
+F: Dipende dalla massa della carica q2
+F: È proporzionale alla distanza percorsa
+F: È massimo quando A e B sono opposti rispetto a q1
+U: Si consideri una carica q che si muove dal punto A al punto B lungo un percorso per ogni punto del quale 𝐸⃗ = 0. Quale di queste affermazioni sull'energia potenziale Ep della carica è corretta:
+T: 𝐸𝑝(𝐴) = 𝐸𝑝(𝐵)
+F: Il potenziale elettrico cambia lungo il percorso
+F: La forza elettrica agisce comunque su q
+F: La carica acquista energia cinetica
+Q: Nella legge di Biot-Savart: 𝑑𝐵⃗ = 𝑘𝑚(𝑖 𝑑𝑙⃗ × 𝑢𝑟⃗ )/𝑟^2. Il vettore 𝑟⃗ che individua la posizione del punto in cui si vuole calcolare il campo magnetico 𝐵⃗ rispetto al tratto di corrente 𝑖𝑑𝑙⃗ è specificato indicando il versore 𝑢𝑟⃗ e la lunghezza 𝑟. Qual è l’esponente n che compare sulla legge di Biot-Savart?
+I: biot_savart.png
+T: n = 2
+F: n = 1
+F: n = 3
+F: n = 0
+U: Considerando ora un punto D che si trova sull’asse della spira ma non nel piano della spira, i contributi 𝑑𝐵𝐷⃗ e 𝑑𝐵𝐷⃗′ dovuti a due tratti di corrente hanno:
+T: Stesso modulo, direzione diversa, risultante diretta perpendicolarmente al piano della spira e verso sempre uscente dalla figura
+F: Modulo diverso, ma stessa direzione
+F: Si annullano tra loro
+F: Sono paralleli e diretti lungo il piano della spira
+U: Si consideri una la spira circolare di raggio R percorsa da corrente i (senso antiorario) mostrata in figura. Si consideri il campo magnetico al centro C della spira è diretto.  Il contributo 𝑑𝐵𝐶⃗ dovuto al tratto di corrente 𝑖𝑑𝑙⃗ è diretto:
+T: Perpendicolarmente al piano della spira ed uscente dalla figura
+F: Radialmente verso il centro
+F: Tangente alla spira
+F: Nel piano della spira
+U: Il contributo 𝑑𝐵𝐶⃗ dovuto al tratto di corrente 𝑖𝑑𝑙⃗ che si trova in posizione diametralmente opposta:
+T: È uguale a quello del tratto 𝑖𝑑𝑙⃗
+F: È nullo
+F: È diretto nel verso opposto
+F: Ha modulo diverso
+U: Se il raggio R della spira raddoppia, il campo magnetico al centro della spira:
+T: Si dimezza
+F: Raddoppia
+F: Resta invariato
+F: Diventa nullo
