@@ -9,11 +9,6 @@ export default function Page() {
   const [questions, setQuestions] = useState([]);
   const [openRandomQuiz, setOpenRandomQuiz] = useState(false);
   const [openAllQuiz, setOpenAllQuiz] = useState(false);
-  const [openReview, setOpenReview] = useState(false);
-
-  const handleOpenReview = () => {
-    setOpenReview(true);
-  };
 
   const [locked, setLocked] = useState(false);
 
@@ -106,8 +101,8 @@ export default function Page() {
             <Quiz
               questions={questions}
               quizQuestions={2}
+              handleClose={() => setOpenRandomQuiz(false)}
               handleReset={handleReset}
-              handleOpenReview={handleOpenReview}
             />
           </div>
         )}
@@ -116,14 +111,9 @@ export default function Page() {
             <Quiz
               questions={questions}
               quizQuestions={questions.length}
+              handleClose={() => setOpenAllQuiz(false)}
               handleReset={handleReset}
-              handleOpenReview={handleOpenReview}
             />
-          </div>
-        )}
-        {openReview && (
-          <div className="mt-6 w-full max-w-2xl">
-            <ReviewQuiz />
           </div>
         )}
       </main>

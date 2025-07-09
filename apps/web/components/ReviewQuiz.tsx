@@ -12,9 +12,16 @@ import { Label } from "@workspace/ui/components/label";
 import { ReactNode, useState } from "react";
 import { Button } from "@workspace/ui/components/button";
 
-export default function ReviewQuiz() {
-  const [quiz] = useState(getLastQuiz());
-
+export default function ReviewQuiz({
+  questions,
+  userAnswers,
+  handleReset,
+}: {
+  questions: Question[];
+  userAnswers: UserAnswer[];
+  handleReset: () => void;
+}) {
+  console.log("ReviewQuiz component rendered");
   const renderQuestion = (
     question: Question,
     userAnswer: UserAnswer
@@ -40,9 +47,6 @@ export default function ReviewQuiz() {
             {question.answers.map((answer, index) => {
               const isCorrect = answer.isCorrect;
               const isSelected = userAnswer.isCorrect;
-              console.log(
-                `for question id '${question.id}', user answer is '${userAnswer.answerText}', answer is '${answer.answerText}', isCorrect: '${isCorrect}', isSelected: '${isSelected}'`
-              );
               return (
                 <div className="flex items-center gap-3" key={index}>
                   <RadioGroupItem
@@ -64,7 +68,7 @@ export default function ReviewQuiz() {
             <hr className="my-4 ml-4 mr-4" />
             {renderQuestion(
               question.followUpQuestion,
-              quiz!.userAnswers[question.followUpQuestion.id]!
+              userAnswers[question.followUpQuestion.id]!
             )}
           </>
         )}
@@ -76,19 +80,20 @@ export default function ReviewQuiz() {
     <>
       <hr className="my-4" />
       <h2 className="text-xl font-semibold mb-2">Revisione del Quiz</h2>
-      {quiz &&
-        quiz.questions.map((question, index) => (
-          <div key={index}>
-            <h3 className="text-md font-medium mb-4">
-              Domanda {index + 1} di {quiz.questions.length}
-            </h3>
-            <Card className="mb-4">
-              {renderQuestion(question, quiz.userAnswers[index]!)}
-            </Card>
-          </div>
-        ))}
+      {questions.map((question, index) => (
+        <div key={index}>
+          <h3 className="text-md font-medium mb-4">
+            Domanda {index + 1} di {questions.length}
+          </h3>
+          <Card className="mb-4">
+            {renderQuestion(question, userAnswers[index]!)}
+          </Card>
+        </div>
+      ))}
       <div className="mb-4 flex justify-center">
-        <Button variant={"outline"}>Chiudi</Button>
+        <Button variant={"outline"} onClick={handleReset}>
+          Chiudi
+        </Button>
       </div>
     </>
   );

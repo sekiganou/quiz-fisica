@@ -30,6 +30,11 @@ import { renderQuestion } from "./renderQuestion";
 import { GreenTick } from "./GreenTick";
 import { RedCross } from "./RedCross";
 import ReviewQuiz from "./ReviewQuiz";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@workspace/ui/components/dialog";
 
 function shuffleQuestions(questions: Question[]): Question[] {
   const shuffledQuestions = shuffleArray(
@@ -55,12 +60,12 @@ function shuffleAnswers({ question }: { question: Question }): Question {
 function mapCorrectAnswers(questions: Question[]): Map<number, string> {
   const correctAnswerMapping = new Map<number, string>();
   questions.forEach((question) => {
-    getAllTrueAnswersHelper(question, correctAnswerMapping);
+    mapCorrectAnswersHelper(question, correctAnswerMapping);
   });
   return correctAnswerMapping;
 }
 
-function getAllTrueAnswersHelper(
+function mapCorrectAnswersHelper(
   question: Question,
   correctAnswerMapping: Map<number, string>
 ) {
@@ -70,71 +75,59 @@ function getAllTrueAnswersHelper(
     }
   });
   if (question.followUpQuestion) {
-    getAllTrueAnswersHelper(question.followUpQuestion, correctAnswerMapping);
+    mapCorrectAnswersHelper(question.followUpQuestion, correctAnswerMapping);
   }
 }
 
 export default function Quiz({
   questions,
   quizQuestions,
+  handleClose,
   handleReset,
-  handleOpenReview,
 }: {
   questions: Question[];
   quizQuestions?: number;
+  handleClose: () => void;
   handleReset: () => void;
-  handleOpenReview: () => void;
 }) {
   const [shuffledQuestions] = useState(
     shuffleQuestions(questions).slice(0, quizQuestions || questions.length)
   );
 
-  const [correctAnswers, setCorrectAnswers] = useState<Map<number, string>>(
+  const [correctAnswers] = useState<Map<number, string>>(
     mapCorrectAnswers(shuffledQuestions)
   );
-  const [lastQuiz, setLastQuiz] = useState(() => {
-    // Only save the quiz if it hasn't been saved yet
-    return getLastQuiz() ?? saveLastQuiz(shuffledQuestions);
-  });
+  // const [lastQuiz, setLastQuiz] = useState(() => {
+  //   // Only save the quiz if it hasn't been saved yet
+  //   return getLastQuiz() ?? saveLastQuiz(shuffledQuestions);
+  // });
 
   const [currentPercent, setCurrentPercent] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   // Always derive currentQuestion from currentQuestionIndex and shuffledQuestions
-  const [showFollowUp, setShowFollowUp] = useState(false);
+  const [showNextQuestion, setShowNextQuestion] = useState(false);
   const [correctUserAnswers, setCorrectUserAnswers] = useState(0);
   const [wrongUserAnswers, setWrongUserAnswers] = useState(0);
 
   const [openReview, setOpenReview] = useState(false);
-  const [shouldOpenReview, setShouldOpenReview] = useState(false);
+
+  const handleOpenReview = () => {
+    setOpenReview(true);
+  };
 
   const [userAnswers, setUserAnswers] = useState<Array<UserAnswer>>([]);
 
-  // Effect to handle opening review after lastQuiz is updated
-  useEffect(() => {
-    if (shouldOpenReview && lastQuiz.userAnswers.length > 0) {
-      handleOpenReview();
-      handleReset();
-      setShouldOpenReview(false);
-    }
-  }, [lastQuiz, shouldOpenReview, handleOpenReview, handleReset]);
+  const isQuizCompleted = currentQuestionIndex >= shuffledQuestions.length - 1;
+
+  const handleMoveToReview = () => {
+    setCurrentPercent(100);
+    setOpenReview(true);
+  };
 
   const handleMoveToNextQuestion = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1);
-
-    // Check if we've reached the end
-    if (currentQuestionIndex >= shuffledQuestions.length - 1) {
-      setLastQuiz((prev) => {
-        const updatedQuiz = { ...prev, userAnswers: userAnswers };
-        updateLastQuiz(userAnswers);
-        return updatedQuiz;
-      });
-      setShouldOpenReview(true);
-
-      return;
-    }
-
-    setShowFollowUp(false);
+    setShowNextQuestion(false);
     form.reset();
   };
 
@@ -205,7 +198,7 @@ export default function Quiz({
       Math.round((currentQuestionIndex + 1 / shuffledQuestions.length) * 100)
     );
 
-    setShowFollowUp(true);
+    setShowNextQuestion(true);
 
     setUserAnswers((prev) => {
       const newAnswers = prev;
@@ -214,10 +207,8 @@ export default function Quiz({
     });
   };
 
-  console.log("lastQuiz", lastQuiz);
-
   return (
-    <>
+    <Dialog>
       <hr className="my-4" />
       <h2 className="text-xl font-semibold mb-2">
         Quiz causale ({quizQuestions} domande)
@@ -247,12 +238,16 @@ export default function Quiz({
                 `${currentQuestion.id}`,
                 form,
                 correctAnswers,
-                showFollowUp
+                showNextQuestion
               )}
           </Card>
 
           <div className="mt-4 flex justify-between mb-4">
-            <Button variant={"outline"} type="submit" disabled={showFollowUp}>
+            <Button
+              variant={"outline"}
+              type="submit"
+              disabled={showNextQuestion}
+            >
               <span className="mr-2">
                 <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
                   <path
@@ -267,7 +262,7 @@ export default function Quiz({
               </span>
               Invia Risposta
             </Button>
-            {showFollowUp && (
+            {showNextQuestion && (
               <Button
                 variant="default"
                 onClick={handleMoveToNextQuestion}
@@ -285,10 +280,31 @@ export default function Quiz({
                     />
                   </svg>
                 </span>
-                {currentQuestionIndex >= shuffledQuestions.length - 1
-                  ? "Rivedi Risultati"
-                  : "Domanda Successiva"}
+                Domanda Successiva
               </Button>
+            )}
+            {isQuizCompleted && (
+              <DialogTrigger asChild>
+                <Button
+                  variant="default"
+                  onClick={handleMoveToReview}
+                  className="mr-32"
+                >
+                  <span className="mr-2">
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                      <path
+                        d="M8 5l8 7-8 7"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        fill="none"
+                      />
+                    </svg>
+                  </span>
+                  Rivedi Risultati
+                </Button>
+              </DialogTrigger>
             )}
             <Button variant={"destructive"} onClick={handleReset}>
               <span className="mr-2">
@@ -307,6 +323,17 @@ export default function Quiz({
           </div>
         </form>
       </Form>
-    </>
+      {openReview && (
+        <DialogContent>
+          <div className="mt-6 w-full max-w-2xl">
+            <ReviewQuiz
+              questions={shuffledQuestions}
+              userAnswers={userAnswers}
+              handleReset={handleReset}
+            />
+          </div>
+        </DialogContent>
+      )}
+    </Dialog>
   );
 }
