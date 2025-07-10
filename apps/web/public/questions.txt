@@ -1,4 +1,5 @@
 Q: Si consideri una particella carica q di massa m in moto con velocità v- in un campo magnetico B-. La forza 𝐹⃗ che il campo magnetico esercita sulla carica è 𝐹⃗ = 𝑞𝑣⃗ × 𝐵⃗. L'angolo formato da 𝐹⃗ e 𝐵⃗:
+N: Particella Carica in Campo Magnetico
 I: traiettoria_q.png
 T: Vale sempre 𝜋/2 oppure 3𝜋/2
 F: Vale sempre 𝜋/2
@@ -30,7 +31,9 @@ U: Nel caso siano presenti sia un campo elettrico sia un campo magnetico, quali 
 T: La forza elettrica non può essere nulla.
 F: La forza elettrica è nulla.
 F: La forza magnetica è nulla.
+
 Q: Il calcolo di un campo elettrico 𝐸⃗ generato da una distribuzione lineare ed uniforme di carica elettrica (densità lineare di carica λ) può essere fatto mediante la legge di Gauss. Il problema in questione ha:
+N: Campo Elettrico Distribuzione Lineare
 T: Simmetria assiale
 F: Simmetria radiale
 F: Simmetria piana
@@ -54,7 +57,9 @@ T: In un punto distante 4R dalla distribuzione
 F: In un punto distante 2R dalla distribuzione
 F: In un punto distante 8R dalla distribuzione
 F: In nessun punto perchè il campo elettrico non dipende dalla distanza dal piano della carica
+
 Q: Un dipolo elettrico è un sistema di due cariche puntiformi +q e -q uguali ma di segno opposto. Il calcolo del campo elettrico E- generato dal dipolo è svolto usando il principio di sovrapposizione. Nel calcolo di 𝐸⃗ è possibile usare il principio di sovrapposizione in quanto:
+N: Dipolo Elettrico e Principio di Sovrapposizione
 T: 𝐸⃗ è un vettore
 F: 𝐸⃗ è uno scalare
 F: Il dipolo è formato da cariche uguali
@@ -79,7 +84,9 @@ T: La distanza tra le due cariche si dimezzasse
 F: La distanza tra le due cariche raddoppiasse
 F: La distanza tra le due cariche restasse invariata
 F: Le cariche valessero ± 𝑞 e la distanza si dimezzasse
+
 Q: Le linee di forza del campo magnetico prodotto da un filo neutro rettilineo percorso da corrente sono:
+N: Campo Magnetico Forza
 T: Cerchi concentrici al filo
 F: Rette parallele al filo
 F: Sempre radiali rispetto al filo
@@ -103,7 +110,9 @@ T: Circonferenze il cui centro sta sul filo
 F: Rette parallele al filo
 F: Sempre radiali rispetto al filo
 F: Linee chiuse che non circondano il filo
+
 Q: Il calcolo del campo elettrico 𝐸⃗ generato da una distribuzione piana ed uniforme di carica elettrica (densità superficiale di carica σ) può essere fatto mediante la legge di Gauss. Il problema in questione ha:
+N: Campo Elettrico Distribuzione Piana
 T: Simmetria piana
 F: Simmetria radiale
 F: Simmetria assiale
@@ -127,7 +136,9 @@ T: In nessun punto perchè il campo elettrico non dipende dalla distanza dal pia
 F: In un punto distante 4R dalla distribuzione
 F: In un punto distante 2R dalla distribuzione
 F: In un punto distante 8R dalla distribuzione
+
 Q: Siano i1 e i2 le correnti che percorrono due fili rettilinei paralleli mostrati in figura, con i1 entrante nel piano della figura (filo 1) e i2 uscente (filo 2). Quale delle configurazioni rappresenta i campi magnetici prodotti dalle due correnti in un punto situato tra essi:
+N: Campo Magnetico Fili Uscenti
 I: fili_uscenti.png
 T: C
 F: A
@@ -147,27 +158,9 @@ U: Se la corrente i2 raddoppia la forza che risente il filo 1:
 T: Raddoppia
 F: Dimezza
 F: Quadruplica
-Q: Nei quesiti seguenti si consideri un dipolo con le cariche sull'asse x e centro del dipolo l'origine x = 0. a) Lungo l'asse del dipolo la direzione del campo elettrico 𝐸⃗ è:
-T: sempre diretta lungo l'asse delle x
-F: sempre perpendicolare all'asse delle x
-F: sempre nulla
-F: sempre radiale rispetto al centro del dipolo
-U: b) Consideriamo il potenziale elettrico generato dal dipolo in un punto P = (0, a, 0) del piano mediano. Detti 𝑉+(𝑃) e 𝑉−(𝑃) i potenziali generati rispettivamente dalla carica +q e -q nel punto P, qual è la relazione tra 𝑉+(𝑃) e 𝑉−(𝑃):
-T: 𝑉−(𝑃) = −𝑉+(𝑃)
-F: 𝑉−(𝑃) = 𝑉+(𝑃)
-F: 𝑉−(𝑃) = 0
-F: 𝑉+(𝑃) = 0
-U: c) Consideriamo il potenziale elettrico generato dal dipolo nel punto 𝑃 = (0, 𝑎, 0) e nel punto 𝑄 = (0, √𝑎, √𝑎). Qual è la relazione tra V(P) e V(Q):
-T: 𝑉(𝑃) = 𝑉(𝑄)
-F: 𝑉(𝑃) > 𝑉(𝑄)
-F: 𝑉(𝑃) < 𝑉(𝑄)
-F: 𝑉(𝑄) = 0
-U: d) Consideriamo il potenziale elettrico generato dal dipolo nel punto P = (0, a, 0) e nel punto 𝑄 = (0, 2𝑎, 0). Qual è la relazione tra V(P) e V(Q):
-T: 𝑉(𝑃) = 𝑉(𝑄)
-F: 𝑉(𝑃) > 𝑉(𝑄)
-F: 𝑉(𝑃) < 𝑉(𝑄)
-F: 𝑉(𝑄) = 0
+
 Q: Si considerino un semiconduttore intrinseco, ad es. il silicio (Si), ed un conduttore ohmico, ad es. il rame (Cu). Dette 𝑛(𝑆𝑖) e 𝑛(𝐶𝑢) la densità dei portatori di carica nei due materiali, quali di queste affermazioni è vera?
+N: Semiconduttore Intrinseco
 T: 𝑛(𝑆𝑖) < 𝑛(𝐶𝑢)
 F: 𝑛(𝑆𝑖) = 𝑛(𝐶𝑢)
 F: 𝑛(𝑆𝑖) > 𝑛(𝐶𝑢)
@@ -182,7 +175,9 @@ I: semiconduttoreIntrinseco.png
 T: b
 F: a
 F: c
+
 Q: Si consideri il condensatore piano mostrato in figura. Sia S la superficie delle armature e d la loro distanza. Sia 𝑉0 = 𝑉(𝑆1) – 𝑉(𝑆2) > 0 la differenza di potenziale tra le armature. In quali dei seguenti casi la capacità del condensatore raddoppia?
+N: Condensatore Piano
 I: condensatore_pg6.png
 T: Dimezzando d
 F: Raddoppiando d
@@ -208,7 +203,9 @@ T: 𝑄(𝑆1) = +𝐶𝑉₀ e 𝑄(𝑆2) = −𝐶𝑉₀
 F: 𝑄(𝑆1) = −𝐶𝑉₀ e 𝑄(𝑆2) = +𝐶𝑉₀
 F: 𝑄(𝑆1) = 𝑄(𝑆2) = 0
 F: 𝑄(𝑆1) = 𝑄(𝑆2) = +𝐶𝑉₀
+
 Q: Due condensatori sono in serie se:
+N: Condensatori Varie
 T: Sono percorsi dalla stessa corrente
 F: Hanno la stessa tensione ai capi
 F: Sono collegati tra loro in parallelo
@@ -258,11 +255,13 @@ T: R/2
 F: 2R
 F: R
 F: R²
+
 Q: Nei quesiti seguenti si consideri un dipolo con le cariche sull’asse x e centro del dipolo l’origine x = 0. a) Lungo l'asse del dipolo la direzione del campo elettrico 𝐸⃗ è:
+N: Dipolo Elettrico
 T: Sempre diretta lungo l'asse delle x
-F: Perpendicolare all'asse delle x
-F: Radiale
-F: Circolare
+F: Sempre perpendicolare all'asse delle x
+F: Sempre radiale rispetto all'asse delle x
+F: Sempre circolare rispetto all'asse delle x
 U: b) Consideriamo il potenziale elettrico generato dal dipolo in un punto P = (0, a, 0) del piano mediano. Detti 𝑉+(𝑃) e 𝑉−(𝑃) i potenziali generati rispettivamente dalla carica +q e -q nel punto P, qual è la relazione tra 𝑉+(𝑃) e 𝑉−(𝑃):
 T: 𝑉−(𝑃) = −𝑉+(𝑃)
 F: 𝑉−(𝑃) = 𝑉+(𝑃)
@@ -279,7 +278,9 @@ F: 𝑉(𝑃) > 𝑉(𝑄)
 F: 𝑉(𝑃) < 𝑉(𝑄)
 F: 𝑉(𝑄) = 0
 F: nessuna delle alternative
+
 Q: Si consideri un transistor NMOS usato come interruttore controllato per il quale 𝑉𝑔𝑠 = +5𝑉. Quale delle seguenti affermazioni è vera?
+N: Transistor NMOS 1
 I: Transistor_nmos2.png
 T: Il transistor si comporta come un interruttore chiuso ("ON")
 F: Il transistor è spento
@@ -290,7 +291,9 @@ T: NAND
 F: AND
 F: NOR
 F: OR
+
 Q: La legge di Ampere afferma ∮ 𝐵⃗ ∙ 𝑑𝑠⃗𝛾 = 4𝜋𝑘𝑚 ∑ 𝑖𝑘𝑘 dove γ è un percorso chiuso. La figura mostra un tratto di lunghezza 𝑙 di un solenoide rettilineo formato da N = 20 spire. Il solenoide è percorso da una corrente stazionaria i. Nel caso della figura a), quale di queste affermazioni è corretta?
+N: Legge di Ampere
 I: solenoide.png
 T: ∫𝑐→𝑏 𝐵⃗ ∙ 𝑑𝑠⃗  + ∫𝑎→𝑑 𝐵⃗ ∙ 𝑑𝑠⃗  = 0
 F: ∫𝑐→𝑏 𝐵⃗ ∙ 𝑑𝑠⃗  + ∫𝑎→𝑑 𝐵⃗ ∙ 𝑑𝑠⃗  != 0
@@ -311,7 +314,9 @@ T: 4πkm5i
 F: 0
 F: 4πkm20i
 F: πkm5i
+
 Q: Si consideri un transistor NMOS usato come interruttore controllato per il quale 𝑉𝑔𝑠 = −1𝑉. Quale delle seguenti affermazioni è vera?
+N: Transistor NMOS 2
 I: Transistor_nmos.png
 T: Il transistor si comporta come un interruttore aperto ("OFF")
 F: Il transistor è in saturazione
@@ -322,7 +327,9 @@ T: NOR
 F: OR
 F: AND
 F: NAND
+
 Q: Quali delle seguenti caratteristiche della forza di Coulomb non è usata per dimostrare il fatto che sia una forza conservativa:
+N: Forza di Coulomb
 T: La forza di Coulomb dipende dalla distanza r tra le cariche come 1/(r^2)
 F: Il modulo della forza dipende solo dalla distanza tra le cariche
 F: La forza può essere derivata da un potenziale scalare
@@ -347,7 +354,9 @@ T: 𝐸𝑝(𝐴) = 𝐸𝑝(𝐵)
 F: Il potenziale elettrico cambia lungo il percorso
 F: La forza elettrica agisce comunque su q
 F: La carica acquista energia cinetica
+
 Q: Nella legge di Biot-Savart: 𝑑𝐵⃗ = 𝑘𝑚(𝑖 𝑑𝑙⃗ × 𝑢𝑟⃗ )/𝑟^2. Il vettore 𝑟⃗ che individua la posizione del punto in cui si vuole calcolare il campo magnetico 𝐵⃗ rispetto al tratto di corrente 𝑖𝑑𝑙⃗ è specificato indicando il versore 𝑢𝑟⃗ e la lunghezza 𝑟. Qual è l’esponente n che compare sulla legge di Biot-Savart?
+N: Legge di Biot-Savart
 I: biot_savart.png
 T: n = 2
 F: n = 1

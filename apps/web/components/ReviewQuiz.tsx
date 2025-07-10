@@ -1,15 +1,14 @@
-import { Question } from "@/app/actions/questions";
-import { getLastQuiz, UserAnswer } from "@/app/actions/stats";
+import { Question, UserAnswer } from "@/app/actions/questions";
 import { Card, CardContent, CardHeader } from "@workspace/ui/components/card";
 import {
   RadioGroup,
   RadioGroupItem,
 } from "@workspace/ui/components/radio-group";
 import Image from "next/image";
-import { GreenTick } from "./GreenTick";
-import { RedCross } from "./RedCross";
+import { GreenTick } from "./icons/GreenTick";
+import { RedCross } from "./icons/RedCross";
 import { Label } from "@workspace/ui/components/label";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { Button } from "@workspace/ui/components/button";
 
 export default function ReviewQuiz({
@@ -21,54 +20,66 @@ export default function ReviewQuiz({
   userAnswers: UserAnswer[];
   handleReset: () => void;
 }) {
-  console.log("ReviewQuiz component rendered");
+  const correctUserAnswers = userAnswers.filter(
+    (answer) => answer.isCorrect
+  ).length;
+  const wrongUserAnswers = userAnswers.length - correctUserAnswers;
+  const handleClose = () => {
+    handleReset();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  console.log("Reviewing quiz with questions:", questions);
+  console.log("User answers:", userAnswers);
   const renderQuestion = (
     question: Question,
     userAnswer: UserAnswer
   ): ReactNode => {
-    if (!question) return;
+    console.log("Rendering question:", question);
+    console.log("User answer:", userAnswer)
+    if (!question || !userAnswer) return;
 
     return (
       <>
-        <CardHeader>{question.questionText}</CardHeader>
-        {question.image && (
-          <div className="flex justify-center mb-4">
-            <Image
-              src={question.image}
-              alt="Question Image"
-              width={500}
-              height={300}
-              className="rounded-lg"
-            />
-          </div>
-        )}
+        <CardHeader>{question.content}</CardHeader>
         <CardContent>
-          <RadioGroup disabled={true} defaultValue={userAnswer.answerText}>
-            {question.answers.map((answer, index) => {
-              const isCorrect = answer.isCorrect;
-              const isSelected = userAnswer.isCorrect;
-              return (
-                <div className="flex items-center gap-3" key={index}>
-                  <RadioGroupItem
-                    value={answer.answerText}
-                    id={`review-${question.id}-answer-${index}`}
-                  />
-                  <Label htmlFor={`review-${question.id}-answer-${index}`}>
-                    {answer.answerText}
-                  </Label>
-                  {isCorrect && <GreenTick />}
-                  {isSelected && !isCorrect && <RedCross />}
-                </div>
-              );
-            })}
-          </RadioGroup>
+          {question.image && (
+            <div className="flex justify-center mb-4">
+              <Image
+                src={question.image}
+                alt="Question Image"
+                width={500}
+                height={300}
+                className="rounded-lg"
+              />
+            </div>
+          )}
+          <div>
+            <RadioGroup disabled={true} defaultValue={userAnswer.answerText}>
+              {question.answers.map((answer, index) => {
+                const isCorrect = answer.isCorrect;
+                const isSelected = !userAnswer.isCorrect && userAnswer.answerText === answer.answerText;
+                return (
+                  <div className="flex items-center gap-3" key={index}>
+                    <RadioGroupItem
+                      value={answer.answerText}
+                      id={`review-${question.id}-answer-${index}`}
+                    />
+                    <Label htmlFor={`review-${question.id}-answer-${index}`}>
+                      {answer.answerText}
+                    </Label>
+                    {isCorrect && <GreenTick />}
+                    {isSelected && !isCorrect && <RedCross />}
+                  </div>
+                );
+              })}
+            </RadioGroup>
+          </div>
         </CardContent>
         {question.followUpQuestion && (
           <>
-            <hr className="my-4 ml-4 mr-4" />
             {renderQuestion(
               question.followUpQuestion,
-              userAnswers[question.followUpQuestion.id]!
+              userAnswers.find(userAnswer => userAnswer.questionId == question.followUpQuestion!.id)!
             )}
           </>
         )}
@@ -78,23 +89,39 @@ export default function ReviewQuiz({
 
   return (
     <>
-      <hr className="my-4" />
-      <h2 className="text-xl font-semibold mb-2">Revisione del Quiz</h2>
-      {questions.map((question, index) => (
-        <div key={index}>
-          <h3 className="text-md font-medium mb-4">
-            Domanda {index + 1} di {questions.length}
-          </h3>
-          <Card className="mb-4">
-            {renderQuestion(question, userAnswers[index]!)}
-          </Card>
+      <div className="flex items-center justify-between gap-4 mb-2">
+        <h2 className="text-xl font-semibold mb-2">Revisione del Quiz</h2>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <GreenTick />
+            <span className="text-green-600 font-semibold">
+              {correctUserAnswers}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <RedCross />
+            <span className="text-red-600 font-semibold">{wrongUserAnswers}</span>
+          </div>
         </div>
-      ))}
+      </div>
+      <hr className="my-4 ml-4 mr-4" />
+      {questions.map((question, index) => (
+        <div key={index} className="mb-2" >
+          <h3 className="text-md font-medium mb-4" >
+            Domanda {index + 1} di {questions.length}
+          </h3 >
+          <Card className="mb-4">
+            {renderQuestion(question, userAnswers.find(userAnswer => userAnswer.questionId == question.id)!)}
+          </Card>
+        </div >
+      ))
+      }
       <div className="mb-4 flex justify-center">
-        <Button variant={"outline"} onClick={handleReset}>
+        <Button variant={"outline"} onClick={handleClose}>
           Chiudi
         </Button>
-      </div>
+      </div >
+
     </>
   );
 }

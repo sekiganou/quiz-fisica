@@ -1,20 +1,30 @@
 "use client";
 
+import { GreenTick } from "@/components/icons/GreenTick";
 import Quiz from "@/components/Quiz";
 import ReviewQuiz from "@/components/ReviewQuiz";
+import Stats from "@/components/Stats";
+import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { Button } from "@workspace/ui/components/button";
+import { Card, CardContent, CardHeader } from "@workspace/ui/components/card";
 import { useEffect, useState } from "react";
 
 export default function Page() {
   const [questions, setQuestions] = useState([]);
   const [openRandomQuiz, setOpenRandomQuiz] = useState(false);
   const [openAllQuiz, setOpenAllQuiz] = useState(false);
+  const [openStats, setOpenStats] = useState(false);
 
   const [locked, setLocked] = useState(false);
 
   const handleOpenRandomQuiz = () => {
     setOpenRandomQuiz(true);
     setLocked(true);
+  };
+
+  const handleOpenStats = () => {
+    setOpenStats(true);
+    handleReset();
   };
 
   const handleOpenAllQuiz = () => {
@@ -41,9 +51,9 @@ export default function Page() {
   return (
     <>
       <header className="flex items-center justify-between p-4 border-b">
-        <h1 className="text-2xl font-bold">Quiz Física</h1>
+        <h1 className="text-2xl font-bold">Quiz Fisica</h1>
         <div className="flex gap-2">
-          <Button variant="outline">Statistiche</Button>
+          <Button variant="outline" onClick={handleOpenStats}>Statistiche</Button>
           <Button variant="destructive">Reset</Button>
         </div>
       </header>
@@ -96,27 +106,31 @@ export default function Page() {
             Inizia da Domanda
           </Button>
         </div>
-        {openRandomQuiz && (
-          <div className="mt-6 w-full max-w-2xl">
+        <div className="mt-6 w-full max-w-2xl">
+          {openRandomQuiz && (
             <Quiz
               questions={questions}
               quizQuestions={2}
-              handleClose={() => setOpenRandomQuiz(false)}
               handleReset={handleReset}
             />
-          </div>
-        )}
-        {openAllQuiz && (
-          <div className="mt-6 w-full max-w-2xl">
+          )}
+          {openAllQuiz && (
             <Quiz
               questions={questions}
               quizQuestions={questions.length}
-              handleClose={() => setOpenAllQuiz(false)}
               handleReset={handleReset}
             />
-          </div>
-        )}
-      </main>
+          )}
+          {openStats && (
+            <Stats />
+          )}
+        </div>
+      </main >
+      {/* <footer className="mt-12 p-4 border-t text-center">
+        <p className="text-sm text-gray-600">
+          <a href="https://github.com/sekiganou/quiz-fisica">Quiz Fisica</a> - Made by  <a href="https://github.com/sekiganou" >sekiganou</a>
+        </p>
+      </footer> */}
     </>
   );
 }

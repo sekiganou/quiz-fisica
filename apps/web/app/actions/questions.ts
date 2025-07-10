@@ -3,6 +3,12 @@
 import { readFileSync } from "fs";
 import path from "path";
 
+export interface UserAnswer {
+  questionId: number;
+  answerText: string;
+  isCorrect: boolean;
+}
+
 interface Answer {
   id: number;
   answerText: string;
@@ -13,7 +19,7 @@ export interface Question {
   id: number;
   title: string;
   image: string | null;
-  questionText: string;
+  content: string;
   followUpQuestion: Question | null;
   answers: Answer[];
 }
@@ -34,7 +40,7 @@ export async function getQuestions() {
 export async function loadQuestionsFromFile(
   input: string
 ): Promise<Question[]> {
-  let questionId = 1;
+  let questionId = 0;
   let fileContent = readFileSync(input, "utf-8");
   const lines = fileContent.split("\n").filter((line) => line.trim() !== "");
   let questions: Question[] = [];
@@ -58,7 +64,7 @@ export async function loadQuestionsFromFile(
           id: questionId++,
           title: "",
           image: null,
-          questionText: currentText,
+          content: currentText,
           followUpQuestion: null,
           answers: [],
         };
@@ -72,7 +78,7 @@ export async function loadQuestionsFromFile(
         const followUpQuestion: Question = {
           id: questionId++,
           title: currentQuestion.title,
-          questionText: currentText,
+          content: currentText,
           image: null,
           followUpQuestion: null,
           answers: [],

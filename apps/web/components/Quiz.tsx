@@ -1,40 +1,20 @@
-import { Question } from "@/app/actions/questions";
-import { Card, CardContent, CardHeader } from "@workspace/ui/components/card";
+import { Question, UserAnswer } from "@/app/actions/questions";
+import { Card } from "@workspace/ui/components/card";
 import { Progress } from "@workspace/ui/components/progress";
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useState } from "react";
 import { Button } from "@workspace/ui/components/button";
 import {
   Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
 } from "@workspace/ui/components/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodTypeAny } from "zod";
 import { shuffleArray } from "@/lib/shuffleArray";
-import {
-  getLastQuiz,
-  saveLastQuiz,
-  updateLastQuiz,
-  UserAnswer,
-} from "@/app/actions/stats";
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from "@workspace/ui/components/radio-group";
-import { Label } from "@workspace/ui/components/label";
 import { renderQuestion } from "./renderQuestion";
-import { GreenTick } from "./GreenTick";
-import { RedCross } from "./RedCross";
+import { GreenTick } from "./icons/GreenTick";
+import { RedCross } from "./icons/RedCross";
 import ReviewQuiz from "./ReviewQuiz";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@workspace/ui/components/dialog";
+import { QuizStat, statsStorage } from "@/app/actions/stats";
 
 function shuffleQuestions(questions: Question[]): Question[] {
   const shuffledQuestions = shuffleArray(
@@ -82,39 +62,35 @@ function mapCorrectAnswersHelper(
 export default function Quiz({
   questions,
   quizQuestions,
-  handleClose,
   handleReset,
 }: {
   questions: Question[];
   quizQuestions?: number;
-  handleClose: () => void;
   handleReset: () => void;
 }) {
   const [shuffledQuestions] = useState(
     shuffleQuestions(questions).slice(0, quizQuestions || questions.length)
   );
 
+  const [quizStat, setQuizStat] = useState<QuizStat>({
+    date: new Date(),
+    arguments: [],
+    totalCorrectAnswers: 0,
+    totalAnswers: 0,
+  });
+
   const [correctAnswers] = useState<Map<number, string>>(
     mapCorrectAnswers(shuffledQuestions)
   );
-  // const [lastQuiz, setLastQuiz] = useState(() => {
-  //   // Only save the quiz if it hasn't been saved yet
-  //   return getLastQuiz() ?? saveLastQuiz(shuffledQuestions);
-  // });
 
   const [currentPercent, setCurrentPercent] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
-  // Always derive currentQuestion from currentQuestionIndex and shuffledQuestions
   const [showNextQuestion, setShowNextQuestion] = useState(false);
   const [correctUserAnswers, setCorrectUserAnswers] = useState(0);
   const [wrongUserAnswers, setWrongUserAnswers] = useState(0);
 
   const [openReview, setOpenReview] = useState(false);
-
-  const handleOpenReview = () => {
-    setOpenReview(true);
-  };
 
   const [userAnswers, setUserAnswers] = useState<Array<UserAnswer>>([]);
 
@@ -123,12 +99,18 @@ export default function Quiz({
   const handleMoveToReview = () => {
     setCurrentPercent(100);
     setOpenReview(true);
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }); // Ensure the form is reset before scrolling
   };
 
   const handleMoveToNextQuestion = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1);
     setShowNextQuestion(false);
     form.reset();
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }); // Ensure the form is reset before scrolling
   };
 
   function buildSchemaFromQuestion(
@@ -136,7 +118,6 @@ export default function Quiz({
     fieldName: string,
     schema: Record<string, ZodTypeAny> = {}
   ): Record<string, ZodTypeAny> {
-    // Add the main question to the schema
     schema[fieldName] = z.enum(
       question.answers.map((a) => a.answerText) as [string, ...string[]],
       {
@@ -144,7 +125,6 @@ export default function Quiz({
       }
     );
 
-    // Recurse into follow-up questions if any
     if (question.followUpQuestion) {
       buildSchemaFromQuestion(
         question.followUpQuestion,
@@ -168,8 +148,8 @@ export default function Quiz({
   });
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    let correct = 0;
-    let wrong = 0;
+    let countCorrect = 0;
+    let countWrong = 0;
     let userAnswersMap = new Array<UserAnswer>();
 
     Object.entries(data).forEach(([questionId, answer]) => {
@@ -180,9 +160,9 @@ export default function Quiz({
           answerText: answer,
           isCorrect: true,
         });
-        correct += 1;
+        countCorrect += 1;
       } else {
-        wrong += 1;
+        countWrong += 1;
         userAnswersMap.push({
           questionId: Number(questionId),
           answerText: answer,
@@ -191,8 +171,8 @@ export default function Quiz({
       }
     });
 
-    setCorrectUserAnswers((prev) => prev + correct);
-    setWrongUserAnswers((prev) => prev + wrong);
+    setCorrectUserAnswers((prev) => prev + countCorrect);
+    setWrongUserAnswers((prev) => prev + countWrong);
 
     setCurrentPercent(
       Math.round((currentQuestionIndex + 1 / shuffledQuestions.length) * 100)
@@ -200,100 +180,73 @@ export default function Quiz({
 
     setShowNextQuestion(true);
 
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    setQuizStat((prev) => ({
+      ...prev,
+      totalCorrectAnswers: prev.totalCorrectAnswers + countCorrect,
+      totalAnswers: prev.totalAnswers + countCorrect + countWrong,
+      arguments: [
+        ...prev.arguments,
+        {
+          title: currentQuestion?.title ?? "",
+          totalCorrectAnswers: countCorrect,
+          totalAnswers: countCorrect + countWrong,
+        },
+      ],
+    }));
+
     setUserAnswers((prev) => {
-      const newAnswers = prev;
-      newAnswers.push(...userAnswersMap);
-      return newAnswers;
+      return [...prev, ...userAnswersMap];
     });
   };
 
   return (
-    <Dialog>
-      <hr className="my-4" />
-      <h2 className="text-xl font-semibold mb-2">
-        Quiz causale ({quizQuestions} domande)
-      </h2>
-      <div className="flex items-center gap-4 mb-2">
-        <Progress value={currentPercent} className="flex-1" />
-        <div className="flex items-center gap-2">
-          <GreenTick />
-          <span className="text-green-600 font-semibold">
-            {correctUserAnswers}
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <RedCross />
-          <span className="text-red-600 font-semibold">{wrongUserAnswers}</span>
-        </div>
-      </div>
-      <h3 className="text-md font-medium mb-4">
-        Domanda {currentQuestionIndex + 1} di {quizQuestions}
-      </h3>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <Card>
-            {currentQuestion &&
-              renderQuestion(
-                currentQuestion,
-                `${currentQuestion.id}`,
-                form,
-                correctAnswers,
-                showNextQuestion
-              )}
-          </Card>
-
-          <div className="mt-4 flex justify-between mb-4">
-            <Button
-              variant={"outline"}
-              type="submit"
-              disabled={showNextQuestion}
-            >
-              <span className="mr-2">
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                  <path
-                    d="M7.629 15.314a1 1 0 0 1-1.414 0l-3.536-3.535a1 1 0 1 1 1.414-1.415l2.829 2.829 6.364-6.364a1 1 0 1 1 1.414 1.415l-7.071 7.07z"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                  />
-                </svg>
+    <>
+      {!openReview &&
+        <>
+          <h2 className="text-xl font-semibold mb-2">
+            Quiz casuale ({quizQuestions} domande)
+          </h2>
+          <div className="flex items-center gap-4 mb-2">
+            <Progress value={currentPercent} className="flex-1" />
+            <div className="flex items-center gap-2">
+              <GreenTick />
+              <span className="text-green-600 font-semibold">
+                {correctUserAnswers}
               </span>
-              Invia Risposta
-            </Button>
-            {showNextQuestion && (
-              <Button
-                variant="default"
-                onClick={handleMoveToNextQuestion}
-                className="mr-32"
-              >
-                <span className="mr-2">
-                  <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                    <path
-                      d="M8 5l8 7-8 7"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      fill="none"
-                    />
-                  </svg>
-                </span>
-                Domanda Successiva
-              </Button>
-            )}
-            {isQuizCompleted && (
-              <DialogTrigger asChild>
+            </div>
+            <div className="flex items-center gap-2">
+              <RedCross />
+              <span className="text-red-600 font-semibold">{wrongUserAnswers}</span>
+            </div>
+          </div>
+          <h3 className="text-md font-medium mb-4">
+            Domanda {currentQuestionIndex + 1} di {quizQuestions}
+          </h3>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <Card>
+                {currentQuestion &&
+                  renderQuestion(
+                    currentQuestion,
+                    `${currentQuestion.id}`,
+                    form,
+                    correctAnswers,
+                    showNextQuestion
+                  )}
+              </Card>
+
+              <div className="mt-4 flex justify-between mb-4">
                 <Button
-                  variant="default"
-                  onClick={handleMoveToReview}
-                  className="mr-32"
+                  variant={"outline"}
+                  type="submit"
+                  disabled={showNextQuestion}
                 >
                   <span className="mr-2">
                     <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
                       <path
-                        d="M8 5l8 7-8 7"
+                        d="M7.629 15.314a1 1 0 0 1-1.414 0l-3.536-3.535a1 1 0 1 1 1.414-1.415l2.829 2.829 6.364-6.364a1 1 0 1 1 1.414 1.415l-7.071 7.07z"
                         stroke="currentColor"
                         strokeWidth="2"
                         strokeLinecap="round"
@@ -302,38 +255,77 @@ export default function Quiz({
                       />
                     </svg>
                   </span>
-                  Rivedi Risultati
+                  Invia Risposta
                 </Button>
-              </DialogTrigger>
-            )}
-            <Button variant={"destructive"} onClick={handleReset}>
-              <span className="mr-2">
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                  <path
-                    d="M6 6l12 12M6 18L18 6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
-              Abbandona
-            </Button>
-          </div>
-        </form>
-      </Form>
+                {!isQuizCompleted && showNextQuestion && (
+                  <Button
+                    variant="default"
+                    onClick={handleMoveToNextQuestion}
+                    className="mr-32"
+                  >
+                    <span className="mr-2">
+                      <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                        <path
+                          d="M8 5l8 7-8 7"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          fill="none"
+                        />
+                      </svg>
+                    </span>
+                    Domanda Successiva
+                  </Button>
+                )}
+                {isQuizCompleted && showNextQuestion && (
+                  <Button
+                    variant="default"
+                    onClick={handleMoveToReview}
+                    className="mr-32"
+                  >
+                    <span className="mr-2">
+                      <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                        <path
+                          d="M8 5l8 7-8 7"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          fill="none"
+                        />
+                      </svg>
+                    </span>
+                    Rivedi Risultati
+                  </Button>
+                )}
+                <Button variant={"destructive"} onClick={handleReset}>
+                  <span className="mr-2">
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                      <path
+                        d="M6 6l12 12M6 18L18 6"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  Abbandona
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </>}
       {openReview && (
-        <DialogContent>
-          <div className="mt-6 w-full max-w-2xl">
-            <ReviewQuiz
-              questions={shuffledQuestions}
-              userAnswers={userAnswers}
-              handleReset={handleReset}
-            />
-          </div>
-        </DialogContent>
+        <div className="mt-6 w-full max-w-2xl">
+          <ReviewQuiz
+            questions={shuffledQuestions}
+            userAnswers={userAnswers}
+            handleReset={handleReset}
+          />
+        </div>
       )}
-    </Dialog>
+    </>
   );
 }

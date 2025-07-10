@@ -13,8 +13,9 @@ import {
 } from "@workspace/ui/components/radio-group";
 import Image from "next/image";
 import { UseFormReturn } from "react-hook-form";
-import { GreenTick } from "./GreenTick";
-import { RedCross } from "./RedCross";
+import { GreenTick } from "./icons/GreenTick";
+import { RedCross } from "./icons/RedCross";
+import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 export const renderQuestion = (
   question: Question,
@@ -41,7 +42,7 @@ export const renderQuestion = (
         name={fieldName}
         render={({ field }) => (
           <FormItem>
-            <CardHeader>{question.questionText}</CardHeader>
+            <CardHeader>{question.content}</CardHeader>
             {question.image && (
               <div className="flex justify-center mb-4">
                 <Image
