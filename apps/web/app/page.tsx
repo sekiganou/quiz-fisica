@@ -146,6 +146,13 @@ export default function Page() {
             <Stats />
           )}
         </div>
+        <footer className="my-8 w-full flex flex-col items-center gap-2 text-sm text-gray-500">
+          <div className="flex items-center gap-2">
+            <span>
+              <span className="font-semibold text-gray-700">Quiz Fisica</span> &mdash; Made by <a href="https://github.com/sekiganou" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">sekiganou</a>
+            </span>
+          </div>
+        </footer>
       </main >
     </>
   );

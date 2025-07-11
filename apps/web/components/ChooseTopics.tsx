@@ -119,23 +119,38 @@ export const ChooseTopics = ({ questions, handleReset }: { questions: Question[]
               <hr className="my-4" />
               <div className="flex justify-between items-center">
                 <Button type="submit">
+                  <span className="mr-2" aria-hidden>
+                    <svg width="18" height="18" fill="none" viewBox="0 0 20 20"><path d="M4 3.5v13a1 1 0 0 0 1.555.832l10.5-6.5a1 1 0 0 0 0-1.664l-10.5-6.5A1 1 0 0 0 4 3.5Z" fill="currentColor" /></svg>
+                  </span>
                   Inizia il quiz
                 </Button>
                 <Button variant="outline" onClick={handleReset}>
-                  Chiudi
+                  <span className="mr-2">
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
+                      <path
+                        d="M6 6l12 12M6 18L18 6"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>                  Chiudi
                 </Button>
               </div>
             </form>
           </Form>
         </>
-      )}
-      {openQuiz && (
-        <Quiz
-          questions={questions.filter(q => selectedTopics.includes(q.title))}
-          quizQuestions={questions.filter(q => selectedTopics.includes(q.title)).length}
-          handleReset={handleReset}
-        />
       )
+      }
+      {
+        openQuiz && (
+          <Quiz
+            questions={questions.filter(q => selectedTopics.includes(q.title))}
+            quizQuestions={questions.filter(q => selectedTopics.includes(q.title)).length}
+            handleReset={handleReset}
+          />
+        )
       }
     </div >
   );
