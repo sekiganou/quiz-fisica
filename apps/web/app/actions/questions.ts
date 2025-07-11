@@ -33,7 +33,7 @@ const TITLE_LETTER = "N";
 const IMAGE_PATH_PREFIX = "/images/";
 
 export async function getQuestions() {
-  const fullPath = path.join(process.cwd(), "public", "tests.txt");
+  const fullPath = path.join(process.cwd(), "public", "questions.txt");
   return await loadQuestionsFromFile(fullPath);
 }
 

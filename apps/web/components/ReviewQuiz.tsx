@@ -28,14 +28,10 @@ export default function ReviewQuiz({
     handleReset();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
-  console.log("Reviewing quiz with questions:", questions);
-  console.log("User answers:", userAnswers);
   const renderQuestion = (
     question: Question,
     userAnswer: UserAnswer
   ): ReactNode => {
-    console.log("Rendering question:", question);
-    console.log("User answer:", userAnswer)
     if (!question || !userAnswer) return;
 
     return (

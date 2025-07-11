@@ -6,7 +6,7 @@ interface Argument {
   totalAnswers: number;
 }
 
-export interface QuizStat {
+export interface QuizStats {
   date: Date;
   arguments: Argument[];
   totalCorrectAnswers: number;
@@ -22,15 +22,15 @@ function reviveQuizStat(key: string, value: any) {
 }
 
 export const statsStorage = {
-  get(): QuizStat[] {
+  get(): QuizStats[] {
     const data = localStorage.getItem(STATS_KEY);
     if (!data) return [];
     return JSON.parse(data, reviveQuizStat);
   },
-  set(stats: QuizStat[]) {
+  set(stats: QuizStats[]) {
     localStorage.setItem(STATS_KEY, JSON.stringify(stats));
   },
-  add(stat: QuizStat) {
+  add(stat: QuizStats) {
     const stats = statsStorage.get();
     stats.push(stat);
     statsStorage.set(stats);

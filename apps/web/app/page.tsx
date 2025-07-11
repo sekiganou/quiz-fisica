@@ -8,6 +8,7 @@ import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { Button } from "@workspace/ui/components/button";
 import { Card, CardContent, CardHeader } from "@workspace/ui/components/card";
 import { useEffect, useState } from "react";
+import { statsStorage } from "./actions/stats";
 
 export default function Page() {
   const [questions, setQuestions] = useState([]);
@@ -17,22 +18,30 @@ export default function Page() {
 
   const [locked, setLocked] = useState(false);
 
+  const handleResetStats = () => {
+    statsStorage.clear();
+    setOpenStats(false);
+  }
   const handleOpenRandomQuiz = () => {
     setOpenRandomQuiz(true);
+    setOpenStats(false);
     setLocked(true);
   };
 
   const handleOpenStats = () => {
     setOpenStats(true);
-    handleReset();
+    setOpenAllQuiz(false);
+    setOpenRandomQuiz(false);
+    setLocked(false);
   };
 
   const handleOpenAllQuiz = () => {
     setOpenAllQuiz(true);
+    setOpenStats(false);
     setLocked(true);
   };
 
-  const handleReset = () => {
+  const handleResetQuestions = () => {
     setOpenRandomQuiz(false);
     setOpenAllQuiz(false);
     setLocked(false);
@@ -54,7 +63,7 @@ export default function Page() {
         <h1 className="text-2xl font-bold">Quiz Fisica</h1>
         <div className="flex gap-2">
           <Button variant="outline" onClick={handleOpenStats}>Statistiche</Button>
-          <Button variant="destructive">Reset</Button>
+          <Button variant="destructive" onClick={handleResetStats}>Reset</Button>
         </div>
       </header>
       <main className="flex flex-col items-center w-full mt-8">
@@ -111,14 +120,14 @@ export default function Page() {
             <Quiz
               questions={questions}
               quizQuestions={2}
-              handleReset={handleReset}
+              handleReset={handleResetQuestions}
             />
           )}
           {openAllQuiz && (
             <Quiz
               questions={questions}
               quizQuestions={questions.length}
-              handleReset={handleReset}
+              handleReset={handleResetQuestions}
             />
           )}
           {openStats && (

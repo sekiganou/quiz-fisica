@@ -14,7 +14,7 @@ import { renderQuestion } from "./renderQuestion";
 import { GreenTick } from "./icons/GreenTick";
 import { RedCross } from "./icons/RedCross";
 import ReviewQuiz from "./ReviewQuiz";
-import { QuizStat, statsStorage } from "@/app/actions/stats";
+import { QuizStats, statsStorage } from "@/app/actions/stats";
 
 function shuffleQuestions(questions: Question[]): Question[] {
   const shuffledQuestions = shuffleArray(
@@ -72,7 +72,7 @@ export default function Quiz({
     shuffleQuestions(questions).slice(0, quizQuestions || questions.length)
   );
 
-  const [quizStat, setQuizStat] = useState<QuizStat>({
+  const [quizStats, setQuizStats] = useState<QuizStats>({
     date: new Date(),
     arguments: [],
     totalCorrectAnswers: 0,
@@ -101,7 +101,8 @@ export default function Quiz({
     setOpenReview(true);
     requestAnimationFrame(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }); // Ensure the form is reset before scrolling
+    });
+    statsStorage.add(quizStats)
   };
 
   const handleMoveToNextQuestion = () => {
@@ -182,7 +183,7 @@ export default function Quiz({
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    setQuizStat((prev) => ({
+    setQuizStats((prev) => ({
       ...prev,
       totalCorrectAnswers: prev.totalCorrectAnswers + countCorrect,
       totalAnswers: prev.totalAnswers + countCorrect + countWrong,
