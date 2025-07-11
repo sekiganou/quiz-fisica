@@ -24,25 +24,25 @@ export default function Stats() {
   const cards = {
     totalAnswers: {
       header: "Risposte totali",
-      content: totalAnswers,
+      content: totalAnswers > 0 ? totalAnswers : "-",
       icon: null,
       color: "text-blue-600"
     },
     totalCorrectAnswers: {
       header: "Risposte corrette",
-      content: totalCorrectAnswers,
+      content: totalAnswers > 0 ? totalCorrectAnswers : "-",
       icon: <GreenTick />,
       color: "text-green-600"
     },
     totalWrongAnswers: {
       header: "Risposte errate",
-      content: totalAnswers - totalCorrectAnswers,
+      content: totalAnswers > 0 ? totalAnswers - totalCorrectAnswers : "-",
       icon: <RedCross />,
       color: "text-red-600"
     },
     successRate: {
       header: "Percentuale successo",
-      content: totalAnswers > 0 ? (totalCorrectAnswers / totalAnswers * 100).toFixed(2) + ' %' : '0 %',
+      content: totalAnswers > 0 ? (totalCorrectAnswers / totalAnswers * 100).toFixed(2) + ' %' : '- %',
       icon: null,
       color: "text-blue-600"
     }
@@ -60,18 +60,19 @@ export default function Stats() {
         title: question.title,
         totalCorrectAnswers: stats
           .reduce((sum, stat) =>
-            sum + stat.arguments
+            sum + stat.topics
               .filter(arg => arg.title === question.title)
               .reduce((acc, arg) => acc + arg.totalCorrectAnswers, 0), 0),
         totalAnswers: stats
           .reduce((sum, stat) =>
-            sum + stat.arguments
+            sum + stat.topics
               .filter(arg => arg.title === question.title)
               .reduce((acc, arg) => acc + arg.totalAnswers, 0), 0)
       })));
     }
 
     fetchQuestions();
+
 
   }, [stats]);
 
@@ -105,10 +106,10 @@ export default function Stats() {
         <TableHeader>
           <TableRow>
             <TableHead>Titolo</TableHead>
-            <TableHead>Risposte totali</TableHead>
-            <TableHead>Risposte corrette</TableHead>
-            <TableHead>Risposte errate</TableHead>
-            <TableHead>Percentuale</TableHead>
+            <TableHead>R. totali</TableHead>
+            <TableHead>R. corrette</TableHead>
+            <TableHead>R. errate</TableHead>
+            <TableHead>P. successo</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -118,16 +119,16 @@ export default function Stats() {
                 {stat.title}
               </TableCell>
               <TableCell>
-                {stat.totalAnswers}
+                {stat.totalAnswers > 0 ? stat.totalAnswers : "-"}
               </TableCell>
               <TableCell>
-                {stat.totalCorrectAnswers}
+                {stat.totalAnswers > 0 ? stat.totalCorrectAnswers : "-"}
               </TableCell>
               <TableCell>
-                {stat.totalAnswers - stat.totalCorrectAnswers}
+                {stat.totalAnswers > 0 ? stat.totalAnswers - stat.totalCorrectAnswers : "-"}
               </TableCell>
               <TableCell>
-                {stat.totalAnswers > 0 ? (stat.totalCorrectAnswers / stat.totalAnswers * 100).toFixed(2) : 0} %
+                {stat.totalAnswers > 0 ? (stat.totalCorrectAnswers / stat.totalAnswers * 100).toFixed(2) + " %" : "- %"}
               </TableCell>
             </TableRow>
           )}

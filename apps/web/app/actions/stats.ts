@@ -1,6 +1,6 @@
 const STATS_KEY = "quiz_stats";
 
-interface Argument {
+interface Topic {
   title: string;
   totalCorrectAnswers: number;
   totalAnswers: number;
@@ -8,7 +8,7 @@ interface Argument {
 
 export interface QuizStats {
   date: Date;
-  arguments: Argument[];
+  topics: Topic[];
   totalCorrectAnswers: number;
   totalAnswers: number;
 }

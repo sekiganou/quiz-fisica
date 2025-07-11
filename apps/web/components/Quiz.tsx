@@ -74,7 +74,7 @@ export default function Quiz({
 
   const [quizStats, setQuizStats] = useState<QuizStats>({
     date: new Date(),
-    arguments: [],
+    topics: [],
     totalCorrectAnswers: 0,
     totalAnswers: 0,
   });
@@ -187,8 +187,8 @@ export default function Quiz({
       ...prev,
       totalCorrectAnswers: prev.totalCorrectAnswers + countCorrect,
       totalAnswers: prev.totalAnswers + countCorrect + countWrong,
-      arguments: [
-        ...prev.arguments,
+      topics: [
+        ...prev.topics,
         {
           title: currentQuestion?.title ?? "",
           totalCorrectAnswers: countCorrect,
