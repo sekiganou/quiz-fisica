@@ -3,6 +3,12 @@
 import { readFileSync } from "fs";
 import path from "path";
 
+export interface UserAnswer {
+  questionId: number;
+  answerText: string;
+  isCorrect: boolean;
+}
+
 interface Answer {
   id: number;
   answerText: string;
@@ -11,8 +17,9 @@ interface Answer {
 
 export interface Question {
   id: number;
+  title: string;
   image: string | null;
-  questionText: string;
+  content: string;
   followUpQuestion: Question | null;
   answers: Answer[];
 }
@@ -22,6 +29,7 @@ const FOLLOWUPQUESTION_LETTER = "U";
 const TRUEANSWER_LETTER = "T";
 const FALSEANSWER_LETTER = "F";
 const IMAGE_LETTER = "I";
+const TITLE_LETTER = "N";
 const IMAGE_PATH_PREFIX = "/images/";
 
 export async function getQuestions() {
@@ -32,7 +40,7 @@ export async function getQuestions() {
 export async function loadQuestionsFromFile(
   input: string
 ): Promise<Question[]> {
-  let questionId = 1;
+  let questionId = 0;
   let fileContent = readFileSync(input, "utf-8");
   const lines = fileContent.split("\n").filter((line) => line.trim() !== "");
   let questions: Question[] = [];
@@ -43,7 +51,8 @@ export async function loadQuestionsFromFile(
       !line.startsWith(FOLLOWUPQUESTION_LETTER) &&
       !line.startsWith(TRUEANSWER_LETTER) &&
       !line.startsWith(FALSEANSWER_LETTER) &&
-      !line.startsWith(IMAGE_LETTER)
+      !line.startsWith(IMAGE_LETTER) &&
+      !line.startsWith(TITLE_LETTER)
     ) {
       throw new Error(`Invalid line format: ${line}`);
     }
@@ -53,8 +62,9 @@ export async function loadQuestionsFromFile(
       case QUESTION_LETTER: {
         currentQuestion = {
           id: questionId++,
+          title: "",
           image: null,
-          questionText: currentText,
+          content: currentText,
           followUpQuestion: null,
           answers: [],
         };
@@ -67,7 +77,8 @@ export async function loadQuestionsFromFile(
         }
         const followUpQuestion: Question = {
           id: questionId++,
-          questionText: currentText,
+          title: currentQuestion.title,
+          content: currentText,
           image: null,
           followUpQuestion: null,
           answers: [],
@@ -104,6 +115,13 @@ export async function loadQuestionsFromFile(
         }
         const imagePath = IMAGE_PATH_PREFIX + currentText;
         currentQuestion.image = imagePath;
+        break;
+      }
+      case TITLE_LETTER: {
+        if (!currentQuestion) {
+          throw new Error("Title without a main question");
+        }
+        currentQuestion.title = currentText;
         break;
       }
       default:

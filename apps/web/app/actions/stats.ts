@@ -1,86 +1,41 @@
-import { Question } from "./questions";
-
 const STATS_KEY = "quiz_stats";
 
-export interface UserAnswer {
-  questionId: number;
-  answerText: string;
-  isCorrect: boolean;
-}
-
-interface Quiz {
-  questions: Question[];
-  startDate: Date;
-  userAnswers: UserAnswer[];
-}
-interface QuizStats {
-  quizzes: Quiz[];
+interface Argument {
+  title: string;
   totalCorrectAnswers: number;
   totalAnswers: number;
 }
-function getQuizStats(): QuizStats {
-  const stats = localStorage.getItem(STATS_KEY);
-  if (stats) {
-    return JSON.parse(stats);
-  }
-  return {
-    quizzes: [],
-    totalCorrectAnswers: 0,
-    totalAnswers: 0,
-  };
-}
 
-function saveQuizStats(quiz: Quiz): void {
-  const stats = getQuizStats();
-  stats.quizzes.push(quiz);
-  stats.totalCorrectAnswers += quiz.userAnswers.filter(
-    (answer) => answer.isCorrect
-  ).length;
-  stats.totalAnswers += quiz.userAnswers.length;
-  localStorage.setItem(STATS_KEY, JSON.stringify(stats));
-}
-
-export function clearQuizStats(): void {
-  localStorage.removeItem(STATS_KEY);
-}
-
-export function getQuizStatsSummary(): {
-  totalQuizzes: number;
+export interface QuizStats {
+  date: Date;
+  arguments: Argument[];
   totalCorrectAnswers: number;
   totalAnswers: number;
-} {
-  const stats = getQuizStats();
-  return {
-    totalQuizzes: stats.quizzes.length,
-    totalCorrectAnswers: stats.totalCorrectAnswers,
-    totalAnswers: stats.totalAnswers,
-  };
 }
 
-export function getLastQuiz(): Quiz | null {
-  const stats = getQuizStats();
-  return stats.quizzes.length > 0
-    ? stats.quizzes[stats.quizzes.length - 1]!
-    : null;
-}
-
-export function saveLastQuiz(questions: Question[]): Quiz {
-  const quiz: Quiz = {
-    questions,
-    userAnswers: [],
-    startDate: new Date(),
-  };
-  saveQuizStats(quiz);
-  return quiz;
-}
-
-export function updateLastQuiz(userAnswers: UserAnswer[]): void {
-  const stats = getQuizStats();
-  if (stats.quizzes.length > 0) {
-    const lastQuiz = stats.quizzes[stats.quizzes.length - 1];
-    if (lastQuiz) {
-      lastQuiz.userAnswers = userAnswers;
-      localStorage.setItem(STATS_KEY, JSON.stringify(stats));
-    }
+// Helper to serialize/deserialize Date
+function reviveQuizStat(key: string, value: any) {
+  if (key === "date" && typeof value === "string") {
+    return new Date(value);
   }
+  return value;
 }
+
+export const statsStorage = {
+  get(): QuizStats[] {
+    const data = localStorage.getItem(STATS_KEY);
+    if (!data) return [];
+    return JSON.parse(data, reviveQuizStat);
+  },
+  set(stats: QuizStats[]) {
+    localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+  },
+  add(stat: QuizStats) {
+    const stats = statsStorage.get();
+    stats.push(stat);
+    statsStorage.set(stats);
+  },
+  clear() {
+    localStorage.removeItem(STATS_KEY);
+  }
+};

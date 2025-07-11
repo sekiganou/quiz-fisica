@@ -1,0 +1,54 @@
+Q: Nella legge di Biot-Savart: 𝑑𝐵⃗ = 𝑘𝑚(𝑖 𝑑𝑙⃗ × 𝑢𝑟⃗ )/𝑟^2. Il vettore 𝑟⃗ che individua la posizione del punto in cui si vuole calcolare il campo magnetico 𝐵⃗ rispetto al tratto di corrente 𝑖𝑑𝑙⃗ è specificato indicando il versore 𝑢𝑟⃗ e la lunghezza 𝑟. Qual è l’esponente n che compare sulla legge di Biot-Savart?
+N: Biot-Savart
+I: biot_savart.png
+T: n = 2
+F: n = 1
+F: n = 3
+F: n = 0
+U: Considerando ora un punto D che si trova sull’asse della spira ma non nel piano della spira, i contributi 𝑑𝐵𝐷⃗ e 𝑑𝐵𝐷⃗′ dovuti a due tratti di corrente hanno:
+T: Stesso modulo, direzione diversa, risultante diretta perpendicolarmente al piano della spira e verso sempre uscente dalla figura
+F: Modulo diverso, ma stessa direzione
+F: Si annullano tra loro
+F: Sono paralleli e diretti lungo il piano della spira
+U: Si consideri una la spira circolare di raggio R percorsa da corrente i (senso antiorario) mostrata in figura. Si consideri il campo magnetico al centro C della spira è diretto.  Il contributo 𝑑𝐵𝐶⃗ dovuto al tratto di corrente 𝑖𝑑𝑙⃗ è diretto:
+T: Perpendicolarmente al piano della spira ed uscente dalla figura
+F: Radialmente verso il centro
+F: Tangente alla spira
+F: Nel piano della spira
+U: Il contributo 𝑑𝐵𝐶⃗ dovuto al tratto di corrente 𝑖𝑑𝑙⃗ che si trova in posizione diametralmente opposta:
+T: È uguale a quello del tratto 𝑖𝑑𝑙⃗
+F: È nullo
+F: È diretto nel verso opposto
+F: Ha modulo diverso
+U: Se il raggio R della spira raddoppia, il campo magnetico al centro della spira:
+T: Si dimezza
+F: Raddoppia
+F: Resta invariato
+F: Diventa nullo
+
+Q: Quali delle seguenti caratteristiche della forza di Coulomb non è usata per dimostrare il fatto che sia una forza conservativa:
+N: Forza di Coulomb
+T: La forza di Coulomb dipende dalla distanza r tra le cariche come 1/(r^2)
+F: Il modulo della forza dipende solo dalla distanza tra le cariche
+F: La forza può essere derivata da un potenziale scalare
+F: Il lavoro lungo un percorso chiuso è nullo
+U: Una carica positiva q si sposta nella direzione e verso del campo elettrico 𝐸⃗. Quali delle seguenti affermazioni è vera:
+T: L'energia potenziale di q diminuisce
+F: Il campo elettrico compie lavoro nullo su q
+F: La forza di Coulomb è perpendicolare allo spostamento
+F: La carica q si muove spontaneamente contro il campo
+U: Una carica positiva q si sposta nella direzione perpendicolare al campo elettrico 𝐸⃗. Quali delle seguenti affermazioni è vera:
+T: L'energia potenziale di q non cambia
+F: Il campo elettrico compie lavoro positivo su q
+F: Il potenziale elettrico cambia
+F: La forza elettrica accelera la carica lungo il campo
+U: Si considerino il campo elettrico prodotto da una carica puntiforme q1 e due punti A e B posti alla stessa distanza da q1. Il lavoro fatto da 𝐸⃗ per portare una carica q2 da A a B:
+T: È sempre nullo
+F: Dipende dalla massa della carica q2
+F: È proporzionale alla distanza percorsa
+F: È massimo quando A e B sono opposti rispetto a q1
+U: Si consideri una carica q che si muove dal punto A al punto B lungo un percorso per ogni punto del quale 𝐸⃗ = 0. Quale di queste affermazioni sull'energia potenziale Ep della carica è corretta:
+T: 𝐸𝑝(𝐴) = 𝐸𝑝(𝐵)
+F: Il potenziale elettrico cambia lungo il percorso
+F: La forza elettrica agisce comunque su q
+F: La carica acquista energia cinetica
