@@ -9,12 +9,14 @@ import { Button } from "@workspace/ui/components/button";
 import { Card, CardContent, CardHeader } from "@workspace/ui/components/card";
 import { useEffect, useState } from "react";
 import { statsStorage } from "./actions/stats";
+import { ChooseTopics } from "@/components/ChooseTopics";
 
 export default function Page() {
   const [questions, setQuestions] = useState([]);
   const [openRandomQuiz, setOpenRandomQuiz] = useState(false);
   const [openAllQuiz, setOpenAllQuiz] = useState(false);
   const [openStats, setOpenStats] = useState(false);
+  const [openChooseTopicQuiz, setOpenChooseTopicQuiz] = useState(false);
 
   const [locked, setLocked] = useState(false);
 
@@ -22,9 +24,19 @@ export default function Page() {
     statsStorage.clear();
     setOpenStats(false);
   }
+
+  const handleOpenChooseTopicQuiz = () => {
+    setOpenChooseTopicQuiz(true);
+    setOpenRandomQuiz(false);
+    setOpenAllQuiz(false);
+    setOpenStats(false);
+    setLocked(true);
+  };
+
   const handleOpenRandomQuiz = () => {
     setOpenRandomQuiz(true);
     setOpenStats(false);
+    setOpenChooseTopicQuiz(false);
     setLocked(true);
   };
 
@@ -32,18 +44,23 @@ export default function Page() {
     setOpenStats(true);
     setOpenAllQuiz(false);
     setOpenRandomQuiz(false);
+    setOpenChooseTopicQuiz(false);
     setLocked(false);
   };
 
   const handleOpenAllQuiz = () => {
     setOpenAllQuiz(true);
     setOpenStats(false);
+    setOpenRandomQuiz(false);
+    setOpenChooseTopicQuiz(false);
     setLocked(true);
   };
 
   const handleResetQuestions = () => {
     setOpenRandomQuiz(false);
     setOpenAllQuiz(false);
+    setOpenStats(false);
+    setOpenChooseTopicQuiz(false);
     setLocked(false);
     setQuestions([]);
   };
@@ -82,7 +99,7 @@ export default function Page() {
             </span>
             Domande Casuali
           </Button>
-          <Button disabled={locked}>
+          <Button disabled={locked} onClick={handleOpenChooseTopicQuiz}>
             <span className="mr-2">
               <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
                 <path
@@ -106,14 +123,6 @@ export default function Page() {
             </span>
             Tutti i Quiz
           </Button>
-          <Button disabled={locked}>
-            <span className="mr-2">
-              <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" fill="currentColor" />
-              </svg>
-            </span>
-            Inizia da Domanda
-          </Button>
         </div>
         <div className="mt-6 w-full max-w-2xl">
           {openRandomQuiz && (
@@ -130,16 +139,21 @@ export default function Page() {
               handleReset={handleResetQuestions}
             />
           )}
+          {openChooseTopicQuiz && (
+            <ChooseTopics questions={questions} handleReset={handleResetQuestions} />
+          )}
           {openStats && (
             <Stats />
           )}
         </div>
+        <footer className="my-8 w-full flex flex-col items-center gap-2 text-sm text-gray-500">
+          <div className="flex items-center gap-2">
+            <span>
+              <span className="font-semibold text-gray-700">Quiz Fisica</span> &mdash; Made by <a href="https://github.com/sekiganou" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">sekiganou</a>
+            </span>
+          </div>
+        </footer>
       </main >
-      {/* <footer className="mt-12 p-4 border-t text-center">
-        <p className="text-sm text-gray-600">
-          <a href="https://github.com/sekiganou/quiz-fisica">Quiz Fisica</a> - Made by  <a href="https://github.com/sekiganou" >sekiganou</a>
-        </p>
-      </footer> */}
     </>
   );
 }

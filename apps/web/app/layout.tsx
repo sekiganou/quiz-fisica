@@ -19,9 +19,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning >
+      <meta name="apple-mobile-web-app-title" content="QuizFisica" />
       <body
-        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
+        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased`}
       >
         <Providers>{children}</Providers>
       </body>
