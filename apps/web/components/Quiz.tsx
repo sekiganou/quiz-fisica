@@ -9,8 +9,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodTypeAny } from "zod";
 import { shuffleArray } from "@/lib/shuffleArray";
 import { renderQuestion } from "./renderQuestion";
-import { GreenTick } from "./icons/GreenTick";
-import { RedCross } from "./icons/RedCross";
 import ReviewQuiz from "./ReviewQuiz";
 import { statsByTopicStorage } from "@/app/actions/stats";
 import { IconCheck, IconChevronRight, IconX } from "@tabler/icons-react";
@@ -202,11 +200,9 @@ export default function Quiz({
               <IconCheck />
               <span className="font-semibold">{correctUserAnswers}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <RedCross />
-              <span className="text-red-600 font-semibold">
-                {wrongUserAnswers}
-              </span>
+            <div className="flex items-center gap-2 text-red-600">
+              <IconX />
+              <span className="font-semibold">{wrongUserAnswers}</span>
             </div>
           </div>
           <h3 className="text-md font-medium mb-4">
@@ -253,23 +249,7 @@ export default function Quiz({
                     onClick={handleMoveToNextQuestion}
                     className="w-full sm:w-auto sm:mr-32"
                   >
-                    <span className="mr-2">
-                      <svg
-                        width="18"
-                        height="18"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M8 5l8 7-8 7"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          fill="none"
-                        />
-                      </svg>
-                    </span>
+                    <IconChevronRight />
                     Domanda Successiva
                   </Button>
                 )}
@@ -279,31 +259,11 @@ export default function Quiz({
                     onClick={handleMoveToReview}
                     className="w-full sm:w-auto sm:mr-32"
                   >
-                    <span className="mr-2">
-                      <svg
-                        width="18"
-                        height="18"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          d="M8 5l8 7-8 7"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          fill="none"
-                        />
-                      </svg>
-                    </span>
+                    <IconChevronRight />
                     Rivedi Risultati
                   </Button>
                 )}
-                <Button
-                  variant={"destructive"}
-                  onClick={handleReset}
-                  className="w-full sm:w-auto"
-                >
+                <Button variant={"destructive"} onClick={handleReset}>
                   <IconX />
                   Abbandona
                 </Button>

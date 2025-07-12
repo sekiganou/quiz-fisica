@@ -13,9 +13,7 @@ import {
 } from "@workspace/ui/components/radio-group";
 import Image from "next/image";
 import { UseFormReturn } from "react-hook-form";
-import { GreenTick } from "./icons/GreenTick";
-import { RedCross } from "./icons/RedCross";
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
+import { IconCheck, IconX } from "@tabler/icons-react";
 
 export const renderQuestion = (
   question: Question,
@@ -77,8 +75,8 @@ export const renderQuestion = (
                         <Label htmlFor={`${fieldName}-answer-${index}`}>
                           {answer.answerText}
                         </Label>
-                        {disabled && isCorrect && <GreenTick />}
-                        {disabled && isSelected && !isCorrect && <RedCross />}
+                        {disabled && isCorrect && <IconCheck className="text-green-600" />}
+                        {disabled && isSelected && !isCorrect && <IconX className="text-red-600" />}
                       </div>
                     );
                   })}

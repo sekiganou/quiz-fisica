@@ -134,19 +134,25 @@ export const ChooseTopics = ({
                                       }}
                                     />
                                   </FormControl>
-                                  <FormLabel className="text-sm font-normal flex items-center gap-1">
-                                    {stat.topic}
-                                    {stat.totalAnswers > 0 ? (
-                                      <span className="flex items-center gap-1 text-gray-500">
-                                        <IconCheck size={16} />
-                                        {stat.totalCorrectAnswers}
-                                        <IconX size={16} />
-                                        {stat.totalAnswers -
-                                          stat.totalCorrectAnswers}
-                                      </span>
-                                    ) : (
-                                      <span className="text-gray-500">-</span>
-                                    )}
+                                  <FormLabel className="text-sm font-normal flex items-center gap-2 w-full mr-2">
+                                    <span className="flex-1">{stat.topic}</span>
+                                    <span className="w-4 flex justify-center text-gray-500">
+                                      <IconCheck size={16} />
+                                    </span>
+                                    <span className="w-4 flex justify-center text-gray-500">
+                                      {stat.totalAnswers > 0
+                                        ? stat.totalCorrectAnswers
+                                        : "-"}
+                                    </span>
+                                    <span className="w-4 flex justify-center text-gray-500">
+                                      <IconX size={16} />
+                                    </span>
+                                    <span className="w-4 flex justify-center text-gray-500">
+                                      {stat.totalAnswers > 0
+                                        ? stat.totalAnswers -
+                                          stat.totalCorrectAnswers
+                                        : "-"}
+                                    </span>
                                   </FormLabel>
                                 </FormItem>
                               );
@@ -180,11 +186,7 @@ export const ChooseTopics = ({
       {openQuiz && (
         <Quiz
           questions={questions.filter((q) => selectedTopics.includes(q.topic))}
-          quizQuestions={
-            questions.filter((q) => selectedTopics.includes(q.topic)).length
-          }
           handleReset={handleReset}
-          setLocked={setLocked}
         />
       )}
     </div>
