@@ -1,7 +1,4 @@
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { Card, CardContent, CardHeader } from "@workspace/ui/components/card";
-import { GreenTick } from "./icons/GreenTick";
-import { RedCross } from "./icons/RedCross";
 import { statsStorage } from "@/app/actions/stats";
 import { useEffect, useState } from "react";
 import { Question } from "@/app/actions/questions";
@@ -14,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@workspace/ui/components/table"
+import { IconCheck, IconX } from "@tabler/icons-react";
 
 export default function Stats() {
   const [stats] = useState(statsStorage.get());
@@ -31,13 +29,13 @@ export default function Stats() {
     totalCorrectAnswers: {
       header: "Risposte corrette",
       content: totalAnswers > 0 ? totalCorrectAnswers : "-",
-      icon: <GreenTick />,
+      icon: <IconCheck />,
       color: "text-green-600"
     },
     totalWrongAnswers: {
       header: "Risposte errate",
       content: totalAnswers > 0 ? totalAnswers - totalCorrectAnswers : "-",
-      icon: <RedCross />,
+      icon: <IconX />,
       color: "text-red-600"
     },
     successRate: {
@@ -81,7 +79,6 @@ export default function Stats() {
       <h2 className="text-xl font-semibold">Statistiche Quiz</h2>
       <div className="my-8 flex flex-col sm:flex-row gap-4">
         {cards && Object.entries(cards).map(([key, card]) => (
-          // <AspectRatio ratio={ratio} className="mt-4" key={key}>
           <Card key={key} className="flex-1">
             <div className="flex items-center h-full font-semibold">
               <div>
@@ -95,7 +92,6 @@ export default function Stats() {
               </div>
             </div>
           </Card>
-          // </AspectRatio>
         ))}
       </div>
 

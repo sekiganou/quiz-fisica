@@ -9,6 +9,7 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@workspace/ui/components/form";
 import { Checkbox } from "@workspace/ui/components/checkbox";
+import { IconPlayerPlayFilled, IconX } from "@tabler/icons-react";
 
 export const ChooseTopics = ({ questions, handleReset }: { questions: Question[], handleReset: () => void }) => {
   const [topics] = useState<string[]>(questions.map(question => question.title));
@@ -119,23 +120,12 @@ export const ChooseTopics = ({ questions, handleReset }: { questions: Question[]
               <hr className="my-4" />
               <div className="flex justify-between items-center">
                 <Button type="submit">
-                  <span className="mr-2" aria-hidden>
-                    <svg width="18" height="18" fill="none" viewBox="0 0 20 20"><path d="M4 3.5v13a1 1 0 0 0 1.555.832l10.5-6.5a1 1 0 0 0 0-1.664l-10.5-6.5A1 1 0 0 0 4 3.5Z" fill="currentColor" /></svg>
-                  </span>
+                  <IconPlayerPlayFilled />
                   Inizia il quiz
                 </Button>
                 <Button variant="outline" onClick={handleReset}>
-                  <span className="mr-2">
-                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                      <path
-                        d="M6 6l12 12M6 18L18 6"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>                  Chiudi
+                  <IconX />
+                  Chiudi
                 </Button>
               </div>
             </form>

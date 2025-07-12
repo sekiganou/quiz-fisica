@@ -11,10 +11,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodTypeAny } from "zod";
 import { shuffleArray } from "@/lib/shuffleArray";
 import { renderQuestion } from "./renderQuestion";
-import { GreenTick } from "./icons/GreenTick";
-import { RedCross } from "./icons/RedCross";
 import ReviewQuiz from "./ReviewQuiz";
 import { QuizStats, statsStorage } from "@/app/actions/stats";
+import { IconCheck, IconChevronRight, IconX } from "@tabler/icons-react";
 
 function shuffleQuestions(questions: Question[]): Question[] {
   const shuffledQuestions = shuffleArray(
@@ -211,15 +210,15 @@ export default function Quiz({
           </h2>
           <div className="flex items-center gap-4 mb-2">
             <Progress value={currentPercent} className="flex-1" />
-            <div className="flex items-center gap-2">
-              <GreenTick />
-              <span className="text-green-600 font-semibold">
+            <div className="flex items-center gap-2 text-green-600">
+              <IconCheck />
+              <span className="font-semibold">
                 {correctUserAnswers}
               </span>
             </div>
-            <div className="flex items-center gap-2">
-              <RedCross />
-              <span className="text-red-600 font-semibold">{wrongUserAnswers}</span>
+            <div className="flex items-center gap-2 text-red-600">
+              <IconX />
+              <span className="font-semibold">{wrongUserAnswers}</span>
             </div>
           </div>
           <h3 className="text-md font-medium mb-4">
@@ -244,18 +243,7 @@ export default function Quiz({
                   type="submit"
                   disabled={showNextQuestion}
                 >
-                  <span className="mr-2">
-                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                      <path
-                        d="M7.629 15.314a1 1 0 0 1-1.414 0l-3.536-3.535a1 1 0 1 1 1.414-1.415l2.829 2.829 6.364-6.364a1 1 0 1 1 1.414 1.415l-7.071 7.07z"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        fill="none"
-                      />
-                    </svg>
-                  </span>
+                  <IconCheck />
                   Invia Risposta
                 </Button>
                 {!isQuizCompleted && showNextQuestion && (
@@ -264,18 +252,7 @@ export default function Quiz({
                     onClick={handleMoveToNextQuestion}
                     className="mr-32"
                   >
-                    <span className="mr-2">
-                      <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                        <path
-                          d="M8 5l8 7-8 7"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          fill="none"
-                        />
-                      </svg>
-                    </span>
+                    <IconChevronRight />
                     Domanda Successiva
                   </Button>
                 )}
@@ -285,33 +262,12 @@ export default function Quiz({
                     onClick={handleMoveToReview}
                     className="mr-32"
                   >
-                    <span className="mr-2">
-                      <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                        <path
-                          d="M8 5l8 7-8 7"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          fill="none"
-                        />
-                      </svg>
-                    </span>
+                    <IconChevronRight />
                     Rivedi Risultati
                   </Button>
                 )}
                 <Button variant={"destructive"} onClick={handleReset}>
-                  <span className="mr-2">
-                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24">
-                      <path
-                        d="M6 6l12 12M6 18L18 6"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
+                  <IconX />
                   Abbandona
                 </Button>
               </div>

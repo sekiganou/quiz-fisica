@@ -5,11 +5,10 @@ import {
   RadioGroupItem,
 } from "@workspace/ui/components/radio-group";
 import Image from "next/image";
-import { GreenTick } from "./icons/GreenTick";
-import { RedCross } from "./icons/RedCross";
 import { Label } from "@workspace/ui/components/label";
 import { ReactNode } from "react";
 import { Button } from "@workspace/ui/components/button";
+import { IconCheck, IconX } from "@tabler/icons-react";
 
 export default function ReviewQuiz({
   questions,
@@ -63,8 +62,8 @@ export default function ReviewQuiz({
                     <Label htmlFor={`review-${question.id}-answer-${index}`}>
                       {answer.answerText}
                     </Label>
-                    {isCorrect && <GreenTick />}
-                    {isSelected && !isCorrect && <RedCross />}
+                    {isCorrect && <IconCheck color="text-green-600" />}
+                    {isSelected && !isCorrect && <IconX color="text-red-600" />}
                   </div>
                 );
               })}
@@ -88,14 +87,14 @@ export default function ReviewQuiz({
       <div className="flex items-center justify-between gap-4 mb-2">
         <h2 className="text-xl font-semibold mb-2">Revisione del Quiz</h2>
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <GreenTick />
+          <div className="flex items-center gap-2 text-green-600">
+            <IconCheck />
             <span className="text-green-600 font-semibold">
               {correctUserAnswers}
             </span>
           </div>
-          <div className="flex items-center gap-2">
-            <RedCross />
+          <div className="flex items-center gap-2 text-red-600">
+            <IconX />
             <span className="text-red-600 font-semibold">{wrongUserAnswers}</span>
           </div>
         </div>
