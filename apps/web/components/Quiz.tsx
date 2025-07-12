@@ -62,10 +62,12 @@ export default function Quiz({
   questions,
   quizQuestions,
   handleReset,
+  setLocked,
 }: {
   questions: Question[];
   quizQuestions?: number;
   handleReset: () => void;
+  setLocked: (locked: boolean) => void;
 }) {
   const [shuffledQuestions] = useState(
     shuffleQuestions(questions).slice(0, quizQuestions || questions.length)
@@ -101,6 +103,7 @@ export default function Quiz({
     requestAnimationFrame(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+    setLocked(false);
     statsStorage.add(quizStats)
   };
 
@@ -110,7 +113,7 @@ export default function Quiz({
     form.reset();
     requestAnimationFrame(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }); // Ensure the form is reset before scrolling
+    });
   };
 
   function buildSchemaFromQuestion(
@@ -206,7 +209,7 @@ export default function Quiz({
       {!openReview &&
         <>
           <h2 className="text-xl font-semibold mb-2">
-            Quiz casuale ({quizQuestions} domande)
+            Quiz casuale ({quizQuestions} domand{questions.length > 1 ? "e" : "a"})
           </h2>
           <div className="flex items-center gap-4 mb-2">
             <Progress value={currentPercent} className="flex-1" />
@@ -222,7 +225,7 @@ export default function Quiz({
             </div>
           </div>
           <h3 className="text-md font-medium mb-4">
-            Domanda {currentQuestionIndex + 1} di {quizQuestions}
+            Domanda {currentQuestionIndex + 1} di {quizQuestions} - {currentQuestion?.title}
           </h3>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>

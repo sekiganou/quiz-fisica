@@ -103,16 +103,16 @@ export default function ReviewQuiz({
       {questions.map((question, index) => (
         <div key={index} className="mb-2" >
           <h3 className="text-md font-medium mb-4" >
-            Domanda {index + 1} di {questions.length}
+            Domanda {index + 1} di {questions.length} - {question.title}
           </h3 >
           <Card className="mb-4">
             {renderQuestion(question, userAnswers.find(userAnswer => userAnswer.questionId == question.id)!)}
           </Card>
         </div >
-      ))
-      }
+      ))}
       <div className="mb-4 flex justify-center">
         <Button variant={"outline"} onClick={handleClose}>
+          <IconX />
           Chiudi
         </Button>
       </div >

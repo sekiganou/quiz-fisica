@@ -137,6 +137,7 @@ export default function Page() {
               questions={questions}
               quizQuestions={2}
               handleReset={handleResetQuestions}
+              setLocked={setLocked}
             />
           )}
           {openAllQuiz && (
@@ -144,13 +145,17 @@ export default function Page() {
               questions={questions}
               quizQuestions={questions.length}
               handleReset={handleResetQuestions}
+              setLocked={setLocked}
             />
           )}
           {openChooseTopicQuiz && (
-            <ChooseTopics questions={questions} handleReset={handleResetQuestions} />
+            <ChooseTopics
+              questions={questions}
+              handleReset={handleResetQuestions}
+              setLocked={setLocked} />
           )}
           {openStats && (
-            <Stats />
+            <Stats handleClose={() => setOpenStats(false)} />
           )}
         </div>
         <footer className="my-8 w-full flex flex-col items-center gap-2 text-sm text-gray-500">

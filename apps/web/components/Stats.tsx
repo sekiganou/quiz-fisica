@@ -12,8 +12,9 @@ import {
   TableRow,
 } from "@workspace/ui/components/table"
 import { IconCheck, IconX } from "@tabler/icons-react";
+import { Button } from "@workspace/ui/components/button";
 
-export default function Stats() {
+export default function Stats({ handleClose }: { handleClose: () => void }) {
   const [stats] = useState(statsStorage.get());
   const [totalAnswers, setTotalAnswers] = useState(0);
   const [totalCorrectAnswers, setTotalCorrectAnswers] = useState(0);
@@ -130,6 +131,12 @@ export default function Stats() {
           )}
         </TableBody>
       </Table>
+      <div className="my-4 flex justify-center">
+        <Button variant={"outline"} onClick={handleClose}>
+          <IconX />
+          Chiudi
+        </Button>
+      </div >
     </>
   )
 }

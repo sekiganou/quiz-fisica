@@ -11,7 +11,15 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Checkbox } from "@workspace/ui/components/checkbox";
 import { IconPlayerPlayFilled, IconX } from "@tabler/icons-react";
 
-export const ChooseTopics = ({ questions, handleReset }: { questions: Question[], handleReset: () => void }) => {
+export const ChooseTopics = (
+  { questions,
+    handleReset,
+    setLocked
+  }: {
+    questions: Question[],
+    setLocked: (locked: boolean) => void,
+    handleReset: () => void
+  }) => {
   const [topics] = useState<string[]>(questions.map(question => question.title));
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const [openChooseTopics, setOpenChooseTopics] = useState(true);
@@ -133,14 +141,14 @@ export const ChooseTopics = ({ questions, handleReset }: { questions: Question[]
         </>
       )
       }
-      {
-        openQuiz && (
-          <Quiz
-            questions={questions.filter(q => selectedTopics.includes(q.title))}
-            quizQuestions={questions.filter(q => selectedTopics.includes(q.title)).length}
-            handleReset={handleReset}
-          />
-        )
+      {openQuiz && (
+        <Quiz
+          questions={questions.filter(q => selectedTopics.includes(q.title))}
+          quizQuestions={questions.filter(q => selectedTopics.includes(q.title)).length}
+          handleReset={handleReset}
+          setLocked={setLocked}
+        />
+      )
       }
     </div >
   );
