@@ -45,7 +45,7 @@ export const statsByTopicStorage = {
     return stats.has(topic);
   },
   clear() {
-    localStorage.removeItem(STATS_KEY);
+    localStorage.clear();
   },
   array() {
     const stats = statsByTopicStorage.get();

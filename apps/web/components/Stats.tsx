@@ -21,6 +21,7 @@ export default function Stats({
   handleClose: () => void;
   questions: Question[];
 }) {
+  const [stats, setStats] = useState(statsByTopicStorage.array());
   const [totalAnswers, setTotalAnswers] = useState(0);
   const [totalCorrectAnswers, setTotalCorrectAnswers] = useState(0);
 
@@ -57,11 +58,13 @@ export default function Stats({
   useEffect(() => {
     questions.forEach((question) => {
       if (!statsByTopicStorage.has(question.topic)) {
-        statsByTopicStorage.add({
+        const stat = {
           topic: question.topic,
           totalCorrectAnswers: 0,
           totalAnswers: 0,
-        });
+        };
+        statsByTopicStorage.add(stat);
+        setStats((prev) => [...prev, stat]);
       }
     });
 
@@ -111,8 +114,8 @@ export default function Stats({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {statsByTopicStorage &&
-            statsByTopicStorage.array().map((stat, index) => (
+          {stats &&
+            stats.map((stat, index) => (
               <TableRow key={index}>
                 <TableCell className="font-medium whitespace-pre-line break-words max-w-xs">
                   {stat.topic}
