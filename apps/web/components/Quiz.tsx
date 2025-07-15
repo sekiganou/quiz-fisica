@@ -93,6 +93,7 @@ export default function Quiz({
     requestAnimationFrame(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
+    // setLocked(false);
   };
 
   const handleMoveToNextQuestion = () => {

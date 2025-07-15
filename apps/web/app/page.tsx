@@ -153,7 +153,6 @@ export default function Page() {
               questions={questions}
               quizQuestions={2}
               handleReset={handleResetQuestions}
-              setLocked={setLocked}
             />
           )}
           {openAllQuiz && (
@@ -163,7 +162,6 @@ export default function Page() {
             <ChooseTopics
               questions={questions}
               handleReset={handleResetQuestions}
-              setLocked={setLocked}
             />
           )}
           {openStats && (

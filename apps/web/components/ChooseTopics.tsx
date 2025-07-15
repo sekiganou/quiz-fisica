@@ -22,10 +22,8 @@ import { statsByTopicStorage } from "@/app/actions/stats";
 export const ChooseTopics = ({
   questions,
   handleReset,
-  setLocked,
 }: {
   questions: Question[];
-  setLocked: (locked: boolean) => void;
   handleReset: () => void;
 }) => {
   const [stats, setStats] = useState(statsByTopicStorage.array());
