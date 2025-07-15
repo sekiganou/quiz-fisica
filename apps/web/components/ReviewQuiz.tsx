@@ -27,7 +27,7 @@ export default function ReviewQuiz({
   const handleClose = () => {
     handleReset();
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+  };
   const renderQuestion = (
     question: Question,
     userAnswer: UserAnswer
@@ -53,7 +53,9 @@ export default function ReviewQuiz({
             <RadioGroup disabled={true} defaultValue={userAnswer.answerText}>
               {question.answers.map((answer, index) => {
                 const isCorrect = answer.isCorrect;
-                const isSelected = !userAnswer.isCorrect && userAnswer.answerText === answer.answerText;
+                const isSelected =
+                  !userAnswer.isCorrect &&
+                  userAnswer.answerText === answer.answerText;
                 return (
                   <div className="flex items-center gap-3" key={index}>
                     <RadioGroupItem
@@ -75,7 +77,10 @@ export default function ReviewQuiz({
           <>
             {renderQuestion(
               question.followUpQuestion,
-              userAnswers.find(userAnswer => userAnswer.questionId == question.followUpQuestion!.id)!
+              userAnswers.find(
+                (userAnswer) =>
+                  userAnswer.questionId == question.followUpQuestion!.id
+              )!
             )}
           </>
         )}
@@ -94,30 +99,40 @@ export default function ReviewQuiz({
               {correctUserAnswers}
             </span>
           </div>
-          <div className="flex items-center gap-2">
-            <RedCross />
-            <span className="text-red-600 font-semibold">{wrongUserAnswers}</span>
+          <div className="flex items-center gap-2 text-red-600">
+            <IconX />
+            <span className="text-red-600 font-semibold">
+              {wrongUserAnswers}
+            </span>
           </div>
         </div>
       </div>
       <hr className="my-4 ml-4 mr-4" />
       {questions.map((question, index) => (
-        <div key={index} className="mb-2" >
-          <h3 className="text-md font-medium mb-4" >
-            Domanda {index + 1} di {questions.length}
-          </h3 >
+        <div key={index} className="mb-2">
+          <h3 className="text-md font-medium mb-4">
+            Domanda {index + 1} di {questions.length} - {question.topic}
+          </h3>
           <Card className="mb-4">
-            {renderQuestion(question, userAnswers.find(userAnswer => userAnswer.questionId == question.id)!)}
+            {renderQuestion(
+              question,
+              userAnswers.find(
+                (userAnswer) => userAnswer.questionId == question.id
+              )!
+            )}
           </Card>
-        </div >
-      ))
-      }
+        </div>
+      ))}
       <div className="mb-4 flex justify-center">
-        <Button variant={"outline"} onClick={handleClose}>
+        <Button
+          variant={"outline"}
+          onClick={handleClose}
+          className="w-full sm:w-auto flex items-center justify-center"
+        >
+          <IconX />
           Chiudi
         </Button>
-      </div >
-
+      </div>
     </>
   );
 }

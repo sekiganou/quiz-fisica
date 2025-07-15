@@ -1,10 +1,6 @@
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { Card, CardContent, CardHeader } from "@workspace/ui/components/card";
-import { GreenTick } from "./icons/GreenTick";
-import { RedCross } from "./icons/RedCross";
-import { statsStorage } from "@/app/actions/stats";
+import { statsByTopicStorage } from "@/app/actions/stats";
 import { useEffect, useState } from "react";
-import { Question } from "@/app/actions/questions";
 import {
   Table,
   TableBody,
@@ -13,96 +9,98 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@workspace/ui/components/table"
+} from "@workspace/ui/components/table";
+import { IconCheck, IconX } from "@tabler/icons-react";
+import { Button } from "@workspace/ui/components/button";
+import { Question } from "@/app/actions/questions";
 
-export default function Stats() {
-  const [stats] = useState(statsStorage.get());
+export default function Stats({
+  handleClose,
+  questions,
+}: {
+  handleClose: () => void;
+  questions: Question[];
+}) {
   const [totalAnswers, setTotalAnswers] = useState(0);
   const [totalCorrectAnswers, setTotalCorrectAnswers] = useState(0);
-  const [mappedStats, setMappedStats] = useState<{ title: string; totalCorrectAnswers: number; totalAnswers: number }[]>([]);
 
-  const cards = {
-    totalAnswers: {
+  const cards = [
+    {
       header: "Risposte totali",
       content: totalAnswers > 0 ? totalAnswers : "-",
       icon: null,
-      color: "text-blue-600"
+      color: "text-blue-600",
     },
-    totalCorrectAnswers: {
+    {
       header: "Risposte corrette",
       content: totalAnswers > 0 ? totalCorrectAnswers : "-",
-      icon: <GreenTick />,
-      color: "text-green-600"
+      icon: <IconCheck />,
+      color: "text-green-600",
     },
-    totalWrongAnswers: {
+    {
       header: "Risposte errate",
       content: totalAnswers > 0 ? totalAnswers - totalCorrectAnswers : "-",
-      icon: <RedCross />,
-      color: "text-red-600"
+      icon: <IconX />,
+      color: "text-red-600",
     },
-    successRate: {
+    {
       header: "Percentuale successo",
-      content: totalAnswers > 0 ? (totalCorrectAnswers / totalAnswers * 100).toFixed(2) + ' %' : '- %',
+      content:
+        totalAnswers > 0
+          ? ((totalCorrectAnswers / totalAnswers) * 100).toFixed(2) + " %"
+          : "- %",
       icon: null,
-      color: "text-blue-600"
-    }
-  }
+      color: "text-blue-600",
+    },
+  ];
 
   useEffect(() => {
-    setTotalAnswers(stats.reduce((sum, stat) => sum + stat.totalAnswers, 0));
-    setTotalCorrectAnswers(stats.reduce((sum, stat) => sum + stat.totalCorrectAnswers, 0));
+    questions.forEach((question) => {
+      if (!statsByTopicStorage.has(question.topic)) {
+        statsByTopicStorage.add({
+          topic: question.topic,
+          totalCorrectAnswers: 0,
+          totalAnswers: 0,
+        });
+      }
+    });
 
-    async function fetchQuestions() {
-      const res = await fetch("/api/questions");
-      const questions = await res.json() as Question[];
-
-      setMappedStats(questions.map(question => ({
-        title: question.title,
-        totalCorrectAnswers: stats
-          .reduce((sum, stat) =>
-            sum + stat.topics
-              .filter(arg => arg.title === question.title)
-              .reduce((acc, arg) => acc + arg.totalCorrectAnswers, 0), 0),
-        totalAnswers: stats
-          .reduce((sum, stat) =>
-            sum + stat.topics
-              .filter(arg => arg.title === question.title)
-              .reduce((acc, arg) => acc + arg.totalAnswers, 0), 0)
-      })));
-    }
-
-    fetchQuestions();
-
-
-  }, [stats]);
+    setTotalAnswers(
+      statsByTopicStorage
+        .array()
+        .reduce((sum, stat) => sum + stat.totalAnswers, 0)
+    );
+    setTotalCorrectAnswers(
+      statsByTopicStorage
+        .array()
+        .reduce((sum, stat) => sum + stat.totalCorrectAnswers, 0)
+    );
+  }, [questions]);
 
   return (
     <>
       <h2 className="text-xl font-semibold">Statistiche Quiz</h2>
       <div className="my-8 flex flex-col sm:flex-row gap-4">
-        {cards && Object.entries(cards).map(([key, card]) => (
-          // <AspectRatio ratio={ratio} className="mt-4" key={key}>
-          <Card key={key} className="flex-1">
-            <div className="flex items-center h-full font-semibold">
-              <div>
-                <CardHeader>{card.header}</CardHeader>
-                <CardContent>
-                  <div className={`${card.color} flex items-center gap-2`}>
-                    {card.icon}
-                    {card.content}
-                  </div>
-                </CardContent>
+        {cards &&
+          cards.map((card, index) => (
+            <Card key={index} className="flex-1">
+              <div className="flex items-center h-full font-semibold">
+                <div>
+                  <CardHeader>{card.header}</CardHeader>
+                  <CardContent>
+                    <div className={`${card.color} flex items-center gap-2`}>
+                      {card.icon}
+                      {card.content}
+                    </div>
+                  </CardContent>
+                </div>
               </div>
-            </div>
-          </Card>
-          // </AspectRatio>
-        ))}
+            </Card>
+          ))}
       </div>
 
       <Table>
-        <TableCaption>
-          Statistiche per ogni tipologia di domanda
-        </TableCaption>
+        <TableCaption>Statistiche per ogni tipologia di domanda</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Titolo</TableHead>
@@ -113,27 +111,45 @@ export default function Stats() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {mappedStats && mappedStats.map((stat, index) =>
-            <TableRow key={index}>
-              <TableCell className="font-medium whitespace-pre-line break-words max-w-xs">
-                {stat.title}
-              </TableCell>
-              <TableCell>
-                {stat.totalAnswers > 0 ? stat.totalAnswers : "-"}
-              </TableCell>
-              <TableCell>
-                {stat.totalAnswers > 0 ? stat.totalCorrectAnswers : "-"}
-              </TableCell>
-              <TableCell>
-                {stat.totalAnswers > 0 ? stat.totalAnswers - stat.totalCorrectAnswers : "-"}
-              </TableCell>
-              <TableCell>
-                {stat.totalAnswers > 0 ? (stat.totalCorrectAnswers / stat.totalAnswers * 100).toFixed(2) + " %" : "- %"}
-              </TableCell>
-            </TableRow>
-          )}
+          {statsByTopicStorage &&
+            statsByTopicStorage.array().map((stat, index) => (
+              <TableRow key={index}>
+                <TableCell className="font-medium whitespace-pre-line break-words max-w-xs">
+                  {stat.topic}
+                </TableCell>
+                <TableCell>
+                  {stat.totalAnswers > 0 ? stat.totalAnswers : "-"}
+                </TableCell>
+                <TableCell>
+                  {stat.totalAnswers > 0 ? stat.totalCorrectAnswers : "-"}
+                </TableCell>
+                <TableCell>
+                  {stat.totalAnswers > 0
+                    ? stat.totalAnswers - stat.totalCorrectAnswers
+                    : "-"}
+                </TableCell>
+                <TableCell>
+                  {stat.totalAnswers > 0
+                    ? (
+                        (stat.totalCorrectAnswers / stat.totalAnswers) *
+                        100
+                      ).toFixed(2) + " %"
+                    : "- %"}
+                </TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
+      <div className="my-4 flex justify-center">
+        <Button
+          variant={"outline"}
+          onClick={handleClose}
+          className="w-full sm:w-auto flex items-center justify-center"
+        >
+          <IconX />
+          Chiudi
+        </Button>
+      </div>
     </>
-  )
+  );
 }
