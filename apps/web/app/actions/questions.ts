@@ -17,7 +17,7 @@ interface Answer {
 
 export interface Question {
   id: number;
-  title: string;
+  topic: string;
   image: string | null;
   content: string;
   followUpQuestion: Question | null;
@@ -29,7 +29,7 @@ const FOLLOWUPQUESTION_LETTER = "U";
 const TRUEANSWER_LETTER = "T";
 const FALSEANSWER_LETTER = "F";
 const IMAGE_LETTER = "I";
-const TITLE_LETTER = "N";
+const TOPIC_LETTER = "N";
 const IMAGE_PATH_PREFIX = "/images/";
 
 export async function getQuestions() {
@@ -37,11 +37,9 @@ export async function getQuestions() {
   return await loadQuestionsFromFile(fullPath);
 }
 
-export async function loadQuestionsFromFile(
-  input: string
-): Promise<Question[]> {
+async function loadQuestionsFromFile(fullPath: string): Promise<Question[]> {
   let questionId = 0;
-  let fileContent = readFileSync(input, "utf-8");
+  let fileContent = readFileSync(fullPath, "utf-8");
   const lines = fileContent.split("\n").filter((line) => line.trim() !== "");
   let questions: Question[] = [];
   let currentQuestion: Question | null = null;
@@ -52,7 +50,7 @@ export async function loadQuestionsFromFile(
       !line.startsWith(TRUEANSWER_LETTER) &&
       !line.startsWith(FALSEANSWER_LETTER) &&
       !line.startsWith(IMAGE_LETTER) &&
-      !line.startsWith(TITLE_LETTER)
+      !line.startsWith(TOPIC_LETTER)
     ) {
       throw new Error(`Invalid line format: ${line}`);
     }
@@ -62,7 +60,7 @@ export async function loadQuestionsFromFile(
       case QUESTION_LETTER: {
         currentQuestion = {
           id: questionId++,
-          title: "",
+          topic: "",
           image: null,
           content: currentText,
           followUpQuestion: null,
@@ -77,7 +75,7 @@ export async function loadQuestionsFromFile(
         }
         const followUpQuestion: Question = {
           id: questionId++,
-          title: currentQuestion.title,
+          topic: currentQuestion.topic,
           content: currentText,
           image: null,
           followUpQuestion: null,
@@ -117,11 +115,11 @@ export async function loadQuestionsFromFile(
         currentQuestion.image = imagePath;
         break;
       }
-      case TITLE_LETTER: {
+      case TOPIC_LETTER: {
         if (!currentQuestion) {
           throw new Error("Title without a main question");
         }
-        currentQuestion.title = currentText;
+        currentQuestion.topic = currentText;
         break;
       }
       default:

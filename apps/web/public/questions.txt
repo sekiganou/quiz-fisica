@@ -172,9 +172,9 @@ F: I semiconduttori drogati non conducono elettricità
 F: La conduzione nei semiconduttori drogati dipende solo dalla temperatura
 U: Quali dei seguenti grafici descrive al meglio la caratteristica IV di una giunzione pn polarizzata direttamente?
 I: semiconduttoreIntrinseco.png
-T: b
-F: a
-F: c
+T: B
+F: A
+F: C
 
 Q: Si consideri il condensatore piano mostrato in figura. Sia S la superficie delle armature e d la loro distanza. Sia 𝑉0 = 𝑉(𝑆1) – 𝑉(𝑆2) > 0 la differenza di potenziale tra le armature. In quali dei seguenti casi la capacità del condensatore raddoppia?
 N: Condensatore Piano
@@ -190,13 +190,13 @@ F: Resta invariato
 F: Diventa nullo
 U: Per il modulo del campo elettrico 𝐸⃗ presente tra le armature vale la seguente relazione:
 T: 𝐸(𝑥 = 0) = 𝐸(𝑥 = 𝑑/2) = 𝐸(𝑥 = 𝑑)
-F: 𝐸 varia linearmente con x
-F: 𝐸 è massimo a x = d/2
-F: 𝐸 è nullo a x = 0
+F: 𝐸(𝑥 = 0) = 𝐸(𝑥 = 𝑑*2) = 𝐸(𝑥 = 𝑑)
+F: 𝐸(𝑥 = 0) = 𝐸(𝑥 = 𝑑/4) = 𝐸(𝑥 = 𝑑)
+F: 𝐸(𝑥 = 0) = 𝐸(𝑥 = 𝑑*4) = 𝐸(𝑥 = 𝑑)
 U: Il campo elettrico 𝐸- tra le armature:
 T: Ha lo stesso verso del versore i
-F: Ha verso opposto a i
-F: È perpendicolare a i
+F: Ha verso opposto del versore i
+F: È perpendicolare al versore i
 F: È nullo ovunque
 U: Detta C la capacità del condensatore, se 𝑉(𝑆1) = 𝑉₀ e 𝑉(𝑆2) = 0 la carica sulle armature è:
 T: 𝑄(𝑆1) = +𝐶𝑉₀ e 𝑄(𝑆2) = −𝐶𝑉₀
@@ -283,9 +283,7 @@ Q: Si consideri un transistor NMOS usato come interruttore controllato per il qu
 N: Transistor NMOS 1
 I: Transistor_nmos2.png
 T: Il transistor si comporta come un interruttore chiuso ("ON")
-F: Il transistor è spento
-F: Il transistor non conduce
-F: Il transistor è in interdizione
+F: Il transistor si comporta come un interruttore chiuso ("OFF")
 U: Quale funzione logica elementare è rappresentata dal circuito mostrato in figura?
 T: NAND
 F: AND
@@ -319,9 +317,7 @@ Q: Si consideri un transistor NMOS usato come interruttore controllato per il qu
 N: Transistor NMOS 2
 I: Transistor_nmos.png
 T: Il transistor si comporta come un interruttore aperto ("OFF")
-F: Il transistor è in saturazione
-F: Il transistor conduce corrente
-F: Il transistor è nello stato "ON"
+F: Il transistor si comporta come un interruttore aperto ("ON")
 U: Quale funzione logica elementare è rappresentata dal circuito mostrato in figura?
 T: NOR
 F: OR
@@ -331,19 +327,17 @@ F: NAND
 Q: Quali delle seguenti caratteristiche della forza di Coulomb non è usata per dimostrare il fatto che sia una forza conservativa:
 N: Forza di Coulomb
 T: La forza di Coulomb dipende dalla distanza r tra le cariche come 1/(r^2)
-F: Il modulo della forza dipende solo dalla distanza tra le cariche
+F: La forza di Coulomb dipende dalla distanza r tra le cariche come 1/(r^4)
 F: La forza può essere derivata da un potenziale scalare
 F: Il lavoro lungo un percorso chiuso è nullo
 U: Una carica positiva q si sposta nella direzione e verso del campo elettrico 𝐸⃗. Quali delle seguenti affermazioni è vera:
 T: L'energia potenziale di q diminuisce
-F: Il campo elettrico compie lavoro nullo su q
-F: La forza di Coulomb è perpendicolare allo spostamento
-F: La carica q si muove spontaneamente contro il campo
+F: L'energia potenziale di q aumenta
+F: L'energia potenziale di q non cambia
 U: Una carica positiva q si sposta nella direzione perpendicolare al campo elettrico 𝐸⃗. Quali delle seguenti affermazioni è vera:
 T: L'energia potenziale di q non cambia
-F: Il campo elettrico compie lavoro positivo su q
-F: Il potenziale elettrico cambia
-F: La forza elettrica accelera la carica lungo il campo
+F: L'energia potenziale di q diminuisce
+F: L'energia potenziale di q aumenta
 U: Si considerino il campo elettrico prodotto da una carica puntiforme q1 e due punti A e B posti alla stessa distanza da q1. Il lavoro fatto da 𝐸⃗ per portare una carica q2 da A a B:
 T: È sempre nullo
 F: Dipende dalla massa della carica q2
@@ -351,9 +345,8 @@ F: È proporzionale alla distanza percorsa
 F: È massimo quando A e B sono opposti rispetto a q1
 U: Si consideri una carica q che si muove dal punto A al punto B lungo un percorso per ogni punto del quale 𝐸⃗ = 0. Quale di queste affermazioni sull'energia potenziale Ep della carica è corretta:
 T: 𝐸𝑝(𝐴) = 𝐸𝑝(𝐵)
-F: Il potenziale elettrico cambia lungo il percorso
-F: La forza elettrica agisce comunque su q
-F: La carica acquista energia cinetica
+F: 𝐸𝑝(𝐴) < 𝐸𝑝(𝐵)
+F: 𝐸𝑝(𝐴) > 𝐸𝑝(𝐵)
 
 Q: Nella legge di Biot-Savart: 𝑑𝐵⃗ = 𝑘𝑚(𝑖 𝑑𝑙⃗ × 𝑢𝑟⃗ )/𝑟^2. Il vettore 𝑟⃗ che individua la posizione del punto in cui si vuole calcolare il campo magnetico 𝐵⃗ rispetto al tratto di corrente 𝑖𝑑𝑙⃗ è specificato indicando il versore 𝑢𝑟⃗ e la lunghezza 𝑟. Qual è l’esponente n che compare sulla legge di Biot-Savart?
 N: Legge di Biot-Savart
@@ -364,9 +357,9 @@ F: n = 3
 F: n = 0
 U: Considerando ora un punto D che si trova sull’asse della spira ma non nel piano della spira, i contributi 𝑑𝐵𝐷⃗ e 𝑑𝐵𝐷⃗′ dovuti a due tratti di corrente hanno:
 T: Stesso modulo, direzione diversa, risultante diretta perpendicolarmente al piano della spira e verso sempre uscente dalla figura
-F: Modulo diverso, ma stessa direzione
-F: Si annullano tra loro
-F: Sono paralleli e diretti lungo il piano della spira
+F: Modulo diverso, direzione diversa, risultante diretta perpendicolarmente al piano della spira e verso sempre entrante nella figura
+F: Stesso modulo, stessa direzione, risultante diretta parallelamente al piano della spira e verso sempre uscente dalla figura
+F: Stesso modulo, direzione diversa, risultante diretta parallelamente al piano della spira e verso sempre entrante nella figura
 U: Si consideri una la spira circolare di raggio R percorsa da corrente i (senso antiorario) mostrata in figura. Si consideri il campo magnetico al centro C della spira è diretto.  Il contributo 𝑑𝐵𝐶⃗ dovuto al tratto di corrente 𝑖𝑑𝑙⃗ è diretto:
 T: Perpendicolarmente al piano della spira ed uscente dalla figura
 F: Radialmente verso il centro
@@ -374,9 +367,8 @@ F: Tangente alla spira
 F: Nel piano della spira
 U: Il contributo 𝑑𝐵𝐶⃗ dovuto al tratto di corrente 𝑖𝑑𝑙⃗ che si trova in posizione diametralmente opposta:
 T: È uguale a quello del tratto 𝑖𝑑𝑙⃗
-F: È nullo
-F: È diretto nel verso opposto
-F: Ha modulo diverso
+F: È maggiore a quello del tratto 𝑖𝑑𝑙⃗
+F: È minore a quello del tratto 𝑖𝑑𝑙⃗
 U: Se il raggio R della spira raddoppia, il campo magnetico al centro della spira:
 T: Si dimezza
 F: Raddoppia

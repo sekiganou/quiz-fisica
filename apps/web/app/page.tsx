@@ -4,8 +4,17 @@ import Quiz from "@/components/Quiz";
 import Stats from "@/components/Stats";
 import { Button } from "@workspace/ui/components/button";
 import { useEffect, useState } from "react";
-import { statsStorage } from "./actions/stats";
+import { statsByTopicStorage } from "./actions/stats";
 import { ChooseTopics } from "@/components/ChooseTopics";
+import {
+  IconArrowsShuffle,
+  IconChartDots2,
+  IconInfinity,
+  IconList,
+  IconTrashFilled,
+  IconX,
+} from "@tabler/icons-react";
+import { Question } from "./actions/questions";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,11 +25,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@workspace/ui/components/alert-dialog"
-import { IconArrowsShuffle, IconChartBar, IconChartDots2, IconInfinity, IconList, IconTrashFilled, IconTrashX } from "@tabler/icons-react";
+} from "@workspace/ui/components/alert-dialog";
 
 export default function Page() {
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [openRandomQuiz, setOpenRandomQuiz] = useState(false);
   const [openAllQuiz, setOpenAllQuiz] = useState(false);
   const [openStats, setOpenStats] = useState(false);
@@ -28,9 +36,9 @@ export default function Page() {
   const [locked, setLocked] = useState(false);
 
   const handleResetStats = () => {
-    statsStorage.clear();
+    statsByTopicStorage.clear();
     setOpenStats(false);
-  }
+  };
 
   const handleOpenChooseTopicQuiz = () => {
     setOpenChooseTopicQuiz(true);
@@ -75,44 +83,53 @@ export default function Page() {
   useEffect(() => {
     async function fetchQuestions() {
       const res = await fetch("/api/questions");
-      const data = await res.json();
-      setQuestions(data);
+      const questions = (await res.json()) as Question[];
+      setQuestions(questions);
     }
 
     fetchQuestions();
   }, [locked]);
   return (
     <>
-      <header className="flex items-center justify-between p-4 border-b">
-        <h1 className="text-2xl font-bold">Quiz Fisica</h1>
+      <header className="flex items-center justify-between p-4 border-b gap-2">
+        <div className="flex items-center gap-2">
+          <img src="/icon0.svg" alt="Logo" className="h-7 w-auto" />
+          <h1 className="text-2xl font-bold">Quiz Fisica</h1>
+        </div>
         <div className="flex gap-2">
           <Button variant="outline" onClick={handleOpenStats}>
             <IconChartDots2 />
-            Statistiche
+            <span className="hidden sm:inline">Statistiche</span>
           </Button>
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button variant="destructive">
                 <IconTrashFilled />
-                Reset
+                <span className="hidden sm:inline">Reset</span>
               </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
                 <AlertDialogTitle>Conferma Reset</AlertDialogTitle>
                 <AlertDialogDescription>
-                  Sei sicuro di voler resettare le statistiche? Questa azione non può essere annullata.
+                  Sei sicuro di voler resettare le statistiche? Questa azione
+                  non può essere annullata.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>Annulla</AlertDialogCancel>
-                <AlertDialogAction onClick={handleResetStats}>Conferma</AlertDialogAction>
+                <AlertDialogCancel>
+                  <IconX /> Annulla
+                </AlertDialogCancel>
+                <AlertDialogAction onClick={handleResetStats}>
+                  <IconTrashFilled />
+                  Conferma
+                </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
         </div>
       </header>
-      <main className="flex flex-col items-center w-full mt-8" >
+      <main className="flex flex-col items-center w-full mt-8">
         <p className="mb-6 text-lg text-center max-w-xl">
           Metti alla prova le tue conoscenze con tutte le domande reali d'esame!
         </p>
@@ -132,7 +149,6 @@ export default function Page() {
         </div>
         <div className="mt-6 w-full max-w-2xl px-2 sm:px-0">
           {openRandomQuiz && (
-
             <Quiz
               questions={questions}
               quizQuestions={2}
@@ -141,33 +157,39 @@ export default function Page() {
             />
           )}
           {openAllQuiz && (
-            <Quiz
-              questions={questions}
-              quizQuestions={questions.length}
-              handleReset={handleResetQuestions}
-              setLocked={setLocked}
-            />
+            <Quiz questions={questions} handleReset={handleResetQuestions} />
           )}
           {openChooseTopicQuiz && (
             <ChooseTopics
               questions={questions}
               handleReset={handleResetQuestions}
-              setLocked={setLocked} />
+              setLocked={setLocked}
+            />
           )}
           {openStats && (
-            <Stats handleClose={() => setOpenStats(false)} />
+            <Stats
+              questions={questions}
+              handleClose={() => setOpenStats(false)}
+            />
           )}
         </div>
         <footer className="my-8 w-full flex flex-col items-center gap-2 text-sm text-gray-500">
           <div className="flex items-center gap-2">
             <span>
-              <span className="font-semibold text-gray-700">Quiz Fisica</span> &mdash; Made by <a href="https://github.com/sekiganou" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">
+              <span className="font-semibold text-gray-700">Quiz Fisica</span>{" "}
+              &mdash; Made by{" "}
+              <a
+                href="https://github.com/sekiganou"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-white"
+              >
                 sekiganou
               </a>
             </span>
           </div>
         </footer>
-      </main >
+      </main>
     </>
   );
 }

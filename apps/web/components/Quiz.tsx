@@ -3,16 +3,14 @@ import { Card } from "@workspace/ui/components/card";
 import { Progress } from "@workspace/ui/components/progress";
 import { useState } from "react";
 import { Button } from "@workspace/ui/components/button";
-import {
-  Form,
-} from "@workspace/ui/components/form";
+import { Form } from "@workspace/ui/components/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z, ZodTypeAny } from "zod";
 import { shuffleArray } from "@/lib/shuffleArray";
 import { renderQuestion } from "./renderQuestion";
 import ReviewQuiz from "./ReviewQuiz";
-import { QuizStats, statsStorage } from "@/app/actions/stats";
+import { statsByTopicStorage } from "@/app/actions/stats";
 import { IconCheck, IconChevronRight, IconX } from "@tabler/icons-react";
 
 function shuffleQuestions(questions: Question[]): Question[] {
@@ -62,23 +60,15 @@ export default function Quiz({
   questions,
   quizQuestions,
   handleReset,
-  setLocked,
 }: {
   questions: Question[];
   quizQuestions?: number;
   handleReset: () => void;
-  setLocked: (locked: boolean) => void;
 }) {
+  const quizQuestionsCount = quizQuestions || questions.length;
   const [shuffledQuestions] = useState(
-    shuffleQuestions(questions).slice(0, quizQuestions || questions.length)
+    shuffleQuestions(questions).slice(0, quizQuestionsCount)
   );
-
-  const [quizStats, setQuizStats] = useState<QuizStats>({
-    date: new Date(),
-    topics: [],
-    totalCorrectAnswers: 0,
-    totalAnswers: 0,
-  });
 
   const [correctAnswers] = useState<Map<number, string>>(
     mapCorrectAnswers(shuffledQuestions)
@@ -101,18 +91,19 @@ export default function Quiz({
     setCurrentPercent(100);
     setOpenReview(true);
     requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
-    setLocked(false);
-    statsStorage.add(quizStats)
   };
 
   const handleMoveToNextQuestion = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1);
     setShowNextQuestion(false);
+    setCurrentPercent(
+      Math.round(((currentQuestionIndex + 1) / shuffledQuestions.length) * 100)
+    );
     form.reset();
     requestAnimationFrame(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   };
 
@@ -183,21 +174,15 @@ export default function Quiz({
 
     setShowNextQuestion(true);
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
 
-    setQuizStats((prev) => ({
-      ...prev,
-      totalCorrectAnswers: prev.totalCorrectAnswers + countCorrect,
-      totalAnswers: prev.totalAnswers + countCorrect + countWrong,
-      topics: [
-        ...prev.topics,
-        {
-          title: currentQuestion?.title ?? "",
-          totalCorrectAnswers: countCorrect,
-          totalAnswers: countCorrect + countWrong,
-        },
-      ],
-    }));
+    statsByTopicStorage.add({
+      topic: currentQuestion!.topic,
+      totalCorrectAnswers: countCorrect,
+      totalAnswers: countCorrect + countWrong,
+    });
 
     setUserAnswers((prev) => {
       return [...prev, ...userAnswersMap];
@@ -206,18 +191,17 @@ export default function Quiz({
 
   return (
     <>
-      {!openReview &&
+      {!openReview && (
         <>
           <h2 className="text-xl font-semibold mb-2">
-            Quiz casuale ({quizQuestions} domand{questions.length > 1 ? "e" : "a"})
+            Quiz casuale ({quizQuestionsCount} domand
+            {questions.length > 1 ? "e" : "a"})
           </h2>
           <div className="flex items-center gap-4 mb-2">
             <Progress value={currentPercent} className="flex-1" />
             <div className="flex items-center gap-2 text-green-600">
               <IconCheck />
-              <span className="font-semibold">
-                {correctUserAnswers}
-              </span>
+              <span className="font-semibold">{correctUserAnswers}</span>
             </div>
             <div className="flex items-center gap-2 text-red-600">
               <IconX />
@@ -225,7 +209,8 @@ export default function Quiz({
             </div>
           </div>
           <h3 className="text-md font-medium mb-4">
-            Domanda {currentQuestionIndex + 1} di {quizQuestions} - {currentQuestion?.title}
+            Domanda {currentQuestionIndex + 1} di {quizQuestionsCount} -{" "}
+            {currentQuestion?.topic}
           </h3>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -240,11 +225,12 @@ export default function Quiz({
                   )}
               </Card>
 
-              <div className="mt-4 flex justify-between mb-4">
+              <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between mb-4">
                 <Button
                   variant={"outline"}
                   type="submit"
                   disabled={showNextQuestion}
+                  className="w-full sm:w-auto"
                 >
                   <IconCheck />
                   Invia Risposta
@@ -253,7 +239,7 @@ export default function Quiz({
                   <Button
                     variant="default"
                     onClick={handleMoveToNextQuestion}
-                    className="mr-32"
+                    className="w-full sm:w-auto sm:mr-32"
                   >
                     <IconChevronRight />
                     Domanda Successiva
@@ -263,7 +249,7 @@ export default function Quiz({
                   <Button
                     variant="default"
                     onClick={handleMoveToReview}
-                    className="mr-32"
+                    className="w-full sm:w-auto sm:mr-32"
                   >
                     <IconChevronRight />
                     Rivedi Risultati
@@ -276,7 +262,8 @@ export default function Quiz({
               </div>
             </form>
           </Form>
-        </>}
+        </>
+      )}
       {openReview && (
         <div className="mt-6 w-full max-w-2xl">
           <ReviewQuiz
