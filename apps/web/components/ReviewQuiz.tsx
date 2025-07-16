@@ -64,8 +64,8 @@ export default function ReviewQuiz({
                     <Label htmlFor={`review-${question.id}-answer-${index}`}>
                       {answer.answerText}
                     </Label>
-                    {isCorrect && <IconCheck color="text-green-600" />}
-                    {isSelected && !isCorrect && <IconX color="text-red-600" />}
+                    {isCorrect && <IconCheck className="text-green-600" />}
+                    {isSelected && !isCorrect && <IconX className="text-red-600" />}
                   </div>
                 );
               })}
