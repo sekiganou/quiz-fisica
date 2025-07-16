@@ -277,11 +277,10 @@ T: 𝑉(𝑃) = 𝑉(𝑄)
 F: 𝑉(𝑃) > 𝑉(𝑄)
 F: 𝑉(𝑃) < 𝑉(𝑄)
 F: 𝑉(𝑄) = 0
-F: nessuna delle alternative
 
 Q: Si consideri un transistor NMOS usato come interruttore controllato per il quale 𝑉𝑔𝑠 = +5𝑉. Quale delle seguenti affermazioni è vera?
 N: Transistor NMOS 1
-I: Transistor_nmos2.png
+I: Transistor_nmos.png
 T: Il transistor si comporta come un interruttore chiuso ("ON")
 F: Il transistor si comporta come un interruttore chiuso ("OFF")
 U: Quale funzione logica elementare è rappresentata dal circuito mostrato in figura?
@@ -315,7 +314,7 @@ F: πkm5i
 
 Q: Si consideri un transistor NMOS usato come interruttore controllato per il quale 𝑉𝑔𝑠 = −1𝑉. Quale delle seguenti affermazioni è vera?
 N: Transistor NMOS 2
-I: Transistor_nmos.png
+I: Transistor_nmos2.png
 T: Il transistor si comporta come un interruttore aperto ("OFF")
 F: Il transistor si comporta come un interruttore aperto ("ON")
 U: Quale funzione logica elementare è rappresentata dal circuito mostrato in figura?
