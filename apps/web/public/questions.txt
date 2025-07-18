@@ -385,6 +385,11 @@ T: 360 000 J
 F: 100 000 J
 F: 360 J
 F: 100 J
+U: Qual è la carica presente nel powerbank quando è completamente carico?
+T: 18 000 C
+F: 5 000 C
+F: 18 C
+F: 5 C
 U: Se il powerbank è collegato a un dispositivo che assorbe 20 W, quanto tempo impiega il powerbank a scaricarsi completamente?
 T: 5 ore
 F: 50 ore
@@ -395,3 +400,8 @@ T: 1800 F
 F: 0.5 F
 F: 500 F
 F: 1.8 F
+U: Se il condensatore carico fosse collegato a una resistenza da 5 Ω, dopo quanto tempo la carica del condensatore diventerebbe pari a 1/e della carica iniziale?
+T: 9000 s
+F: 9 s
+F: 2.5 s
+F: 2500 s
