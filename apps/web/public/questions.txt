@@ -168,8 +168,13 @@ F: 𝑛(𝐶𝑢) = 0
 U: Quali tra le seguenti affermazioni è corretta?
 T: Un semiconduttore drogato di tipo n contiene impurità del V gruppo
 F: Un semiconduttore drogato di tipo n contiene impurità del III gruppo
-F: I semiconduttori drogati non conducono elettricità
-F: La conduzione nei semiconduttori drogati dipende solo dalla temperatura
+F: Un semiconduttore drogato di tipo p contiene impurità del V gruppo
+F: Un semiconduttore drogato di tipo n contiene impurità del IV gruppo
+U: Quali tra le seguenti affermazioni è corretta?
+T: Un semiconduttore drogato di tipo p contiene impurità del III gruppo
+F: Un semiconduttore drogato di tipo n contiene impurità del III gruppo
+F: Un semiconduttore drogato di tipo p contiene impurità del V gruppo
+F: Un semiconduttore drogato di tipo n contiene impurità del IV gruppo
 U: Quali dei seguenti grafici descrive al meglio la caratteristica IV di una giunzione pn polarizzata direttamente?
 I: semiconduttoreIntrinseco.png
 T: B
@@ -373,3 +378,20 @@ T: Si dimezza
 F: Raddoppia
 F: Resta invariato
 F: Diventa nullo
+
+Q: Si consideri un powerbank da 5000 mAh che fornisce una tensione in uscita di 20 V. Qual è l’energia immagazzinata nel powerbank quando è completamente carico?
+N: Elettrostatica: unità di misura
+T: 360 000 J
+F: 100 000 J
+F: 360 J
+F: 100 J
+U: Se il powerbank è collegato a un dispositivo che assorbe 20 W, quanto tempo impiega il powerbank a scaricarsi completamente?
+T: 5 ore
+F: 50 ore
+F: 1.8 ore
+F: 18 ore
+U: Se al posto del powerbank si usasse un condensatore in cui è immagazzinata la stessa energia e che all’inizio fornisce la stessa tensione di uscita (20 V), quale sarebbe la sua capacità?
+T: 1800 F
+F: 0.5 F
+F: 500 F
+F: 1.8 F
