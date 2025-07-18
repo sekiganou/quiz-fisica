@@ -2,7 +2,7 @@ Q: Si consideri una particella carica q di massa m in moto con velocità v- in u
 N: Particella Carica in Campo Magnetico
 I: traiettoria_q.png
 T: Vale sempre 𝜋/2 oppure 3𝜋/2
-F: Vale sempre 𝜋/2
+F: Vale sempre 0 oppure 𝜋
 F: Vale sempre 3𝜋/2
 U: In quali dei seguenti casi q percorre delle circonferenze:
 T: Se 𝐵⃗ e 𝑣⃗ sono perpendicolari e 𝐵⃗ è uniforme
@@ -44,7 +44,7 @@ F: Quadruplica
 F: Dimezza
 U: Nel calcolo di 𝐸⃗, come superficie gaussiana si sceglie:
 T: Un cilindro chiuso il cui asse coincide con la distribuzione di carica
-F: Una sfera centrata sulla distribuzione di carica
+F: Un cilindro aperto il cui asse coincide con la distribuzione di carica
 F: Un cubo che contiene la distribuzione di carica
 F: Un piano parallelo alla distribuzione di carica
 U: Le linee di forza del campo elettrico 𝐸⃗ sono:
@@ -128,7 +128,7 @@ F: Raddoppia
 F: Quadruplica
 U: Nel calcolo di 𝐸⃗, come superficie gaussiana si sceglie:
 T: Un cilindro chiuso il cui asse è diretto perpendicolarmente al piano della carica ed è tagliato a metà da questo
-F: Una sfera centrata sulla distribuzione di carica
+F: Un cilindro aperto il cui asse è diretto perpendicolarmente al piano della carica ed è tagliato a metà da questo
 F: Un cubo che contiene la distribuzione di carica
 F: Un piano parallelo alla distribuzione di carica
 U: Si consideri una carica puntiforme q posta in un punto P distante d dal piano della carica. In quale di questi punti la forza che q risente è ¼ di quella che risente in P:
@@ -144,6 +144,10 @@ T: C
 F: A
 F: B
 F: Nessuna delle alternative
+U: La forza 𝐹⃗ esercitata da un campo magnetico 𝐵⃗ su un tratto di corrente 𝑖𝑙⃗ è 𝐹⃗ = 𝑖𝑙⃗ x 𝐵⃗. Il modulo 𝐹⃗ è massimo se:
+T: 𝑙⃗ e 𝐵⃗ sono perpendicolari
+F: 𝑙⃗ e 𝐵⃗ sono paralleli e diretti nello stesso verso
+F: 𝑙⃗ e 𝐵⃗ sono paralleli e diretti nel verso opposto
 U: Se le correnti sono dirette in verso opposto ma uguali in valore assoluto, la forza che si esercita tra i fili:
 T: È repulsiva
 F: È attrattiva
