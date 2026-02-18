@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
   transpilePackages: ["@workspace/ui"],
   allowedDevOrigins: [
     "http://localhost:3000",
